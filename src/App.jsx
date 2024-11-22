@@ -2,7 +2,7 @@ import { EllipsisVertical, LucideCpu, LucideMemoryStick } from "lucide-react";
 import { useEffect, useState } from "react";
 import * as zebar from "zebar";
 import { Center } from "./components/Center";
-import { Chip } from "./components/Chip";
+import { Chip } from "./components/ui/Chip";
 import { TilingControl } from "./components/TilingControl";
 import { WorkspaceControls } from "./components/WorkspaceControls";
 import { useAutoTiling } from "./utils/useAutoTiling";

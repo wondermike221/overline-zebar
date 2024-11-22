@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../utils/cn";
-import { buttonStyles } from "./Button";
+import { buttonStyles } from "./ui/Button";
 
 export function WorkspaceControls({ output }) {
   if (!output) return null;

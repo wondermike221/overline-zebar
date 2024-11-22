@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { LucideMusic } from "lucide-react";
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState, useRef } from "react";
 
 export const CurrentTrack = forwardRef(
   ({ title, artist, active, startTime, endTime, currentTime }) => {
@@ -37,13 +37,6 @@ export const CurrentTrack = forwardRef(
       },
     };
 
-    const calculateProgress = () => {
-      if (startTime >= endTime) return 100; // Handle edge cases
-      const progress =
-        ((currentTime - startTime) / (endTime - startTime)) * 100;
-      return Math.min(Math.max(progress, 0), 100); // Clamp progress between 0 and 100
-    };
-
     return (
       <AnimatePresence mode="wait">
         {active && (
@@ -63,7 +56,7 @@ export const CurrentTrack = forwardRef(
             >
               <motion.div
                 animate={{
-                  opacity: [0.5, 1, 0.5], // Pulsing opacity
+                  opacity: [0.5, 1, 0.5],
                   transition: {
                     duration: 2.8,
                     ease: "easeInOut",
@@ -81,15 +74,11 @@ export const CurrentTrack = forwardRef(
               <p className="truncate flex-grow max-w-[300px]">{title}</p>
             </div>
 
-            <motion.div
-              className="absolute bottom-0 left-0 h-[1px] mb-[0.5px] bg-gradient-to-r from-background-subtle/80 via-background-subtle/90 to-background-subtle"
-              style={{ width: `${calculateProgress()}%` }}
-              initial={{ width: 0 }}
-              animate={{ width: `${calculateProgress()}%` }}
-              transition={{
-                duration: 0.3,
-                ease: "linear",
-              }}
+            <ProgressBar
+              startTime={startTime}
+              endTime={endTime}
+              currentTime={currentTime}
+              active={active}
             />
           </motion.div>
         )}
@@ -97,5 +86,52 @@ export const CurrentTrack = forwardRef(
     );
   }
 );
+
+const ProgressBar = ({ startTime, endTime, currentTime, active }) => {
+  const [progress, setProgress] = useState(0);
+  const animationFrameRef = useRef(null);
+
+  useEffect(() => {
+    let lastTimestamp = null;
+
+    const updateProgress = (timestamp) => {
+      if (!lastTimestamp) lastTimestamp = timestamp;
+
+      const elapsed = timestamp - lastTimestamp;
+      lastTimestamp = timestamp;
+
+      const timeSinceStart = Math.max(
+        currentTime + elapsed / 1000 - startTime,
+        0
+      );
+      const newProgress = (timeSinceStart / (endTime - startTime)) * 100;
+
+      setProgress(Math.min(Math.max(newProgress, 0), 100));
+
+      if (newProgress < 100 && active) {
+        animationFrameRef.current = requestAnimationFrame(updateProgress);
+      }
+    };
+
+    if (active) {
+      animationFrameRef.current = requestAnimationFrame(updateProgress);
+    }
+
+    return () => cancelAnimationFrame(animationFrameRef.current);
+  }, [startTime, endTime, currentTime, active]);
+
+  return (
+    <motion.div
+      className="absolute bottom-0 left-0 h-[1px] mb-[0.5px] bg-gradient-to-r from-background-subtle/80 via-background-subtle/90 to-background-subtle"
+      style={{ width: `${progress}%` }}
+      initial={{ width: 0 }}
+      animate={{ width: `${progress}%` }}
+      transition={{
+        duration: 0.1,
+        ease: "linear",
+      }}
+    />
+  );
+};
 
 export default CurrentTrack;

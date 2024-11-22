@@ -1,6 +1,6 @@
 import { ChevronRight } from "lucide-react";
 import { cn } from "../utils/cn";
-import { Button } from "./Button";
+import { Button } from "./ui/Button";
 
 export function TilingControl({ output }) {
   if (!output.glazewm) return null;
