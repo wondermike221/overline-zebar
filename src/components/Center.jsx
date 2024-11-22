@@ -1,17 +1,16 @@
 import { motion } from "framer-motion";
 import CurrentTrack from "./CurrentTrack";
+import { WindowTitle } from "./WindowTitle";
 
 export function Center({ output }) {
-  const DATE_PREFIX = ""; // Configure if you want text in front of the date
-  console.log(output?.media);
+  if (!output) return null;
 
   return (
-    <motion.div className="flex gap-2 items-center h-full transition-all ease-in-out">
-      <div>
-        {output?.date?.formatted ? DATE_PREFIX : "Hello!"}{" "}
-        {output?.date?.formatted}
-      </div>
-
+    <motion.div
+      className="flex gap-3 items-center h-full transition-all ease-in-out"
+      layout="position"
+    >
+      <WindowTitle output={output} />
       <CurrentTrack
         title={output?.media?.session?.title}
         artist={output?.media?.session?.artist}

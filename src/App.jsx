@@ -1,12 +1,13 @@
-import { Camera, LucideCpu, LucideMemoryStick } from "lucide-react";
+import { EllipsisVertical, LucideCpu, LucideMemoryStick } from "lucide-react";
 import { useEffect, useState } from "react";
 import * as zebar from "zebar";
-import { Button } from "./components/Button";
+import { Center } from "./components/Center";
 import { Chip } from "./components/Chip";
 import { TilingControl } from "./components/TilingControl";
 import { WorkspaceControls } from "./components/WorkspaceControls";
+import { useAutoTiling } from "./utils/useAutoTiling";
 import { getWeatherIcon } from "./utils/weatherIcons";
-import { Center } from "./components/Center";
+import WindowsIcon from "./components/WindowsIcon";
 
 const providers = zebar.createProviderGroup({
   media: { type: "media" },
@@ -25,11 +26,14 @@ function App() {
     providers.onOutput(() => setOutput(providers.outputMap));
   }, []);
 
+  useAutoTiling(output);
+
   const statIconClassnames = "h-4 w-4 text-icon";
 
   return (
-    <div className="relative flex justify-between items-center bg-background/60 backdrop-blur-lg text-text h-full border border-app-border px-3">
-      <div className="flex items-center gap-8">
+    <div className="relative flex justify-between items-center bg-background/60 backdrop-blur-lg text-text h-full border border-app-border px-3 font-antialiased">
+      <div className="flex items-center gap-3.5">
+        <WindowsIcon className="h-3 w-3 text-icon text-glow-icon" />
         <WorkspaceControls output={output} />
       </div>
 
@@ -37,19 +41,12 @@ function App() {
         <Center output={output} />
       </div>
 
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-2 items-center">
         <div className="flex items-center gap-2">
           <TilingControl output={output} />
-
-          <Button
-            className="h-full"
-            onClick={() =>
-              output.glazewm.runCommand("shell-exec explorer ms-screenclip:")
-            }
-          >
-            <Camera className="h-4 w-4 text-text" />
-          </Button>
         </div>
+
+        <EllipsisVertical className="h-3 w-3 text-icon/60" />
 
         <div className="flex items-center gap-3">
           {output.cpu && (
@@ -77,6 +74,7 @@ function App() {
               stat={`${Math.round(output.weather.celsiusTemp)}°C`}
             />
           )}
+          {output?.date?.formatted}
         </div>
       </div>
     </div>

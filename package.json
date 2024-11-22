@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.60.5",
+    "clsx": "^2.1.1",
     "framer-motion": "^11.11.17",
     "lucide-react": "^0.460.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.4",
     "zebar": "^2.5.1"
   },
   "devDependencies": {
@@ -30,6 +32,7 @@
     "globals": "^15.11.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
+    "twglow": "^0.0.10",
     "vite": "^5.4.10"
   }
 }

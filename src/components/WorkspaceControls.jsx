@@ -1,4 +1,6 @@
-import { Button } from "./Button";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "../utils/cn";
+import { buttonStyles } from "./Button";
 
 export function WorkspaceControls({ output }) {
   if (!output) return null;
@@ -8,34 +10,36 @@ export function WorkspaceControls({ output }) {
   };
 
   return (
-    <div className="flex items-center gap-2">
-      {output.glazewm?.currentWorkspaces?.map((workspace) => {
-        if (workspace.hasFocus) {
+    <div className="flex items-center gap-2 mt-[0.5px]">
+      <AnimatePresence>
+        {output.glazewm?.currentWorkspaces?.map((workspace) => {
+          const isFocused = workspace.hasFocus;
+
           return (
-            <Button
-              className="bg-background-subtle/80 hover:bg-background-subtle/80 border border-white/10 px-2"
+            <motion.div
               key={workspace.name}
-              onClick={() => {
-                workspaceOnClick(workspace);
+              className={cn(
+                buttonStyles,
+                "rounded-full cursor-pointer",
+                isFocused &&
+                  "bg-gradient-to-r from-background-subtle/80 via-background-subtle/90 to-background-subtle border border-white/10"
+              )}
+              initial={{ opacity: 0, padding: "6px 6px" }}
+              animate={{
+                opacity: 1,
+                padding: isFocused ? "5px 12px" : "5px 5px",
               }}
-            >
-              {workspace.displayName ?? workspace.name}
-            </Button>
-          );
-        } else {
-          return (
-            <Button
-              key={workspace.name}
-              className="px-2"
-              onClick={() => {
-                workspaceOnClick(workspace);
+              exit={{ opacity: 0 }}
+              transition={{
+                type: "tween",
+                ease: "easeInOut",
+                duration: 0.2,
               }}
-            >
-              {workspace.displayName ?? workspace.name}
-            </Button>
+              onClick={() => workspaceOnClick(workspace)}
+            />
           );
-        }
-      })}
+        })}
+      </AnimatePresence>
     </div>
   );
 }

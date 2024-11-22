@@ -1,4 +1,5 @@
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import { cn } from "../utils/cn";
 import { Button } from "./Button";
 
 export function TilingControl({ output }) {
@@ -16,11 +17,12 @@ export function TilingControl({ output }) {
         className="h-full"
         onClick={() => output.glazewm.runCommand("toggle-tiling-direction")}
       >
-        {output.glazewm.tilingDirection === "horizontal" ? (
-          <ChevronRight className="h-4 w-4 text-text" />
-        ) : (
-          <ChevronDown className="h-4 w-4 text-text" />
-        )}
+        <ChevronRight
+          className={cn(
+            "h-4 w-4 text-text transition duration-200 ease-in-out",
+            output.glazewm.tilingDirection === "vertical" ? "rotate-90" : ""
+          )}
+        />
       </Button>
     </>
   );
