@@ -1,9 +1,17 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { LucideMusic } from "lucide-react";
-import { forwardRef, useEffect, useState, useRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
+import { MediaSession } from "zebar";
 
 export const CurrentTrack = forwardRef(
-  ({ title, artist, active, startTime, endTime, currentTime }) => {
+  ({
+    title,
+    artist,
+    isPlaying,
+    startTime,
+    endTime,
+    position,
+  }: MediaSession) => {
     const MAX_WIDTH_MD = "28rem";
 
     const collapseTransitionSettings = {
@@ -39,7 +47,7 @@ export const CurrentTrack = forwardRef(
 
     return (
       <AnimatePresence mode="wait">
-        {active && (
+        {isPlaying && (
           <motion.div
             className="cursor-pointer select-none flex items-center bg-background-deeper/30 rounded-md border border-app-border/30 overflow-hidden pr-2 py-0.5 relative"
             initial="hidden"
@@ -77,8 +85,8 @@ export const CurrentTrack = forwardRef(
             <ProgressBar
               startTime={startTime}
               endTime={endTime}
-              currentTime={currentTime}
-              active={active}
+              position={position}
+              isPlaying={isPlaying}
             />
           </motion.div>
         )}
@@ -87,38 +95,37 @@ export const CurrentTrack = forwardRef(
   }
 );
 
-const ProgressBar = ({ startTime, endTime, currentTime, active }) => {
+type ProgressBarProps = Omit<
+  MediaSession,
+  "title" | "artist" | "albumTitle" | "albumArtist" | "trackNumber"
+>;
+
+const ProgressBar = ({
+  isPlaying,
+  startTime,
+  endTime,
+  position,
+}: ProgressBarProps) => {
   const [progress, setProgress] = useState(0);
-  const animationFrameRef = useRef(null);
 
   useEffect(() => {
-    let lastTimestamp = null;
+    if (!isPlaying) return;
 
-    const updateProgress = (timestamp) => {
-      if (!lastTimestamp) lastTimestamp = timestamp;
-
-      const elapsed = timestamp - lastTimestamp;
-      lastTimestamp = timestamp;
-
-      const timeSinceStart = Math.max(
-        currentTime + elapsed / 1000 - startTime,
-        0
-      );
-      const newProgress = (timeSinceStart / (endTime - startTime)) * 100;
+    const updateProgress = () => {
+      const now = performance.now();
+      const elapsedTime = Math.max(position + now / 1000 - startTime, 0);
+      const newProgress = (elapsedTime / (endTime - startTime)) * 100;
 
       setProgress(Math.min(Math.max(newProgress, 0), 100));
 
-      if (newProgress < 100 && active) {
-        animationFrameRef.current = requestAnimationFrame(updateProgress);
+      if (newProgress < 100) {
+        requestAnimationFrame(updateProgress);
       }
     };
 
-    if (active) {
-      animationFrameRef.current = requestAnimationFrame(updateProgress);
-    }
-
-    return () => cancelAnimationFrame(animationFrameRef.current);
-  }, [startTime, endTime, currentTime, active]);
+    const frameId = requestAnimationFrame(updateProgress);
+    return () => cancelAnimationFrame(frameId);
+  }, [startTime, endTime, position, isPlaying]);
 
   return (
     <motion.div
