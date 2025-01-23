@@ -3,9 +3,15 @@
 @tailwind utilities;
 
 body {
-  font-family: "iA Writer Mono", ui-monospace, monospace;
+  font-family: "Monaspace", ui-monospace, monospace;
   font-size: 12px;
   overflow: hidden;
+}
+
+.fix-blurry-translate {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
 html,

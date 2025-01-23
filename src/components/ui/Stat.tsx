@@ -1,4 +1,5 @@
 import { cn } from "../../utils/cn";
+import Ring from "./Ring";
 
 export enum LabelType {
   DEFAULT = "default",
@@ -14,9 +15,9 @@ export enum LabelType {
 export type Thresholds = { min: number; max: number; label: LabelType }[];
 
 const defaultThreshold = [
-  { min: 0, max: 50, label: LabelType.DEFAULT },
-  { min: 85, max: 95, label: LabelType.WARNING },
-  { min: 95, max: 100, label: LabelType.DANGER },
+  { min: 0, max: 70, label: LabelType.DEFAULT },
+  { min: 70, max: 85, label: LabelType.WARNING },
+  { min: 85, max: 100, label: LabelType.DANGER },
 ];
 
 interface StatProps {
@@ -37,13 +38,12 @@ export function Stat({ Icon, stat, threshold = defaultThreshold }: StatProps) {
   }
 
   const statAsInt = getNumbersFromString(stat);
-
   const thresholdLabel = getThresholdLabel(statAsInt);
 
   return (
     <div
       className={cn(
-        "flex items-center gap-1 h-full",
+        "flex items-center justify-center gap-1.5 h-full",
         thresholdLabel === LabelType.DEFAULT && "text-text",
         thresholdLabel === LabelType.WARNING && "text-warning",
         thresholdLabel === LabelType.DANGER && "text-danger"
@@ -51,6 +51,47 @@ export function Stat({ Icon, stat, threshold = defaultThreshold }: StatProps) {
     >
       {Icon}
       <p>{stat}</p>
+    </div>
+  );
+}
+
+export function StatRing({
+  Icon,
+  stat,
+  threshold = defaultThreshold,
+}: StatProps) {
+  function getNumbersFromString(str: string) {
+    const numbers = str.match(/-?\d+/g)?.map(Number);
+    return numbers && numbers.length > 0 ? numbers[0] : NaN;
+  }
+
+  function getThresholdLabel(value: number) {
+    const range = threshold.find((r) => value >= r.min && value <= r.max);
+    return range ? range.label : LabelType.DEFAULT;
+  }
+
+  const statAsInt = getNumbersFromString(stat);
+  const thresholdLabel = getThresholdLabel(statAsInt);
+
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-center gap-1.5 h-full",
+        thresholdLabel === LabelType.DEFAULT && "text-text",
+        thresholdLabel === LabelType.WARNING && "text-warning",
+        thresholdLabel === LabelType.DANGER && "text-danger"
+      )}
+    >
+      {Icon}
+      <Ring
+        className="w-3.5 h-3.5"
+        percentage={statAsInt}
+        strokeColor={cn(
+          thresholdLabel === LabelType.DEFAULT && "stroke-success",
+          thresholdLabel === LabelType.WARNING && "stroke-warning",
+          thresholdLabel === LabelType.DANGER && "stroke-danger"
+        )}
+      />
     </div>
   );
 }

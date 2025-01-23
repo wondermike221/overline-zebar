@@ -2,9 +2,10 @@ import { ChevronRight } from "lucide-react";
 import { cn } from "../utils/cn";
 import { Button } from "./ui/Button";
 import { GlazeWmOutput } from "zebar";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface TilingControlProps {
-  glazewm: GlazeWmOutput | null; 
+  glazewm: GlazeWmOutput | null;
 }
 
 export function TilingControl({ glazewm }: TilingControlProps) {
@@ -12,11 +13,19 @@ export function TilingControl({ glazewm }: TilingControlProps) {
 
   return (
     <>
-      {glazewm.bindingModes.map((bindingMode) => (
-        <Button key={bindingMode.name}>
-          {bindingMode.displayName ?? bindingMode.name}
-        </Button>
-      ))}
+      <AnimatePresence>
+        {glazewm.bindingModes.map((bindingMode) => (
+          <motion.div
+            key={bindingMode.name}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.15, ease: "easeInOut" }}
+            exit={{ opacity: 0 }}
+          >
+            <Button>{bindingMode.displayName ?? bindingMode.name}</Button>
+          </motion.div>
+        ))}
+      </AnimatePresence>
 
       <Button
         className="h-full"
@@ -24,9 +33,10 @@ export function TilingControl({ glazewm }: TilingControlProps) {
       >
         <ChevronRight
           className={cn(
-            "h-4 w-4 text-text transition duration-200 ease-in-out",
+            "h-3 w-4 text-text transition duration-200 ease-in-out",
             glazewm.tilingDirection === "vertical" ? "rotate-90" : ""
           )}
+          strokeWidth={3}
         />
       </Button>
     </>

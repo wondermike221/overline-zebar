@@ -1,9 +1,10 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { Workspace } from "glazewm";
+import { GlazeWmOutput } from "zebar";
 import { cn } from "../utils/cn";
 import { buttonStyles } from "./ui/Button";
 import { Chip } from "./ui/Chip";
-import { GlazeWmOutput } from "zebar";
-import { Workspace } from "glazewm";
+import useMeasure from "react-use-measure";
 
 interface WorkspaceControlsProps {
   glazewm: GlazeWmOutput | null;
@@ -12,43 +13,63 @@ interface WorkspaceControlsProps {
 export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
   if (!glazewm) return null;
 
-  const workspaceOnClick = (workspace: Workspace) => {
-    glazewm.runCommand(`focus --workspace ${workspace.name}`);
+  const [ref, { width }] = useMeasure();
+  const springConfig = {
+    type: "spring",
+    stiffness: 120,
+    damping: 20,
+    mass: 0.8,
   };
 
   return (
-    <Chip>
-      <div className="flex items-center gap-1.5">
-        <AnimatePresence>
-          {glazewm.currentWorkspaces?.map((workspace, idx) => {
-            const isFocused = workspace.hasFocus;
+    <motion.div
+      key="workspace-control-panel"
+      initial={{ width: 0, opacity: 0 }}
+      animate={{ width: width || "auto", opacity: 1 }}
+      exit={{ width: 0, opacity: 0 }}
+      transition={springConfig}
+      className="relative overflow-hidden"
+    >
+      <Chip
+        className={cn(
+          width ? "absolute" : "relative",
+          "flex items-center gap-1.5 px-[3px] py-[3px] select-none"
+        )}
+      >
+        {glazewm.allWorkspaces?.map((workspace: Workspace, idx) => {
+          const isFocused = workspace.hasFocus;
+          return (
+            <button
+              key={workspace.name}
+              onClick={() =>
+                glazewm.runCommand(`focus --workspace ${workspace.name}`)
+              }
+              className={cn(
+                "relative rounded-xl px-2 transition duration-500 ease-in-out text-text/80",
+                isFocused ? "" : "hover:text-text",
+                isFocused && "text-text font-medium"
+              )}
+              style={{
+                WebkitTapHighlightColor: "transparent",
+              }}
+            >
+              <p className="z-10">{workspace.displayName ?? workspace.name}</p>
 
-            return (
-              <motion.div
-                key={workspace.name}
-                className={cn(
-                  buttonStyles,
-                  "rounded-full cursor-pointer",
-                  isFocused &&
-                    "bg-gradient-to-r from-background-subtle/80 via-background-subtle/90 to-background-subtle border border-white/10"
-                )}
-                initial={{ opacity: 0, padding: "4.5px 4.5px" }}
-                animate={{
-                  opacity: 1,
-                  padding: isFocused ? "4.5px 11px" : "4.5px 4.5px",
-                }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  type: "tween",
-                  ease: "easeInOut",
-                  duration: 0.2,
-                }}
-                onClick={() => workspaceOnClick(workspace)}
-              />
-            );
-          })}
-        </AnimatePresence>
-      </div>
-    </Chip>
+              {isFocused && (
+                <motion.span
+                  layoutId="bubble"
+                  className={cn(
+                    buttonStyles,
+                    "bg-background-subtle border-text/20 drop-shadow-sm mix-blend-overlay rounded-xl absolute inset-0",
+                    isFocused && "hover:bg-background-subtle"
+                  )}
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+            </button>
+          );
+        })}
+      </Chip>
+    </motion.div>
   );
 }

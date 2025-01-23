@@ -15,8 +15,20 @@ export const WindowTitle = forwardRef<HTMLDivElement, WindowTitleProps>(
     if (!glazewm) return null;
 
     const title = getWindowTitle(glazewm);
-
     const ANIMATION_EXIT_OFFSET = 3;
+
+    function handleWindowTitle(e: React.MouseEvent, textToCopy: string) {
+      if (e.altKey) {
+        navigator.clipboard
+          .writeText(textToCopy)
+          .then(() => {
+            console.log(`Copied to clipboard: ${textToCopy}`);
+          })
+          .catch((err) => {
+            console.error("Failed to copy text to clipboard:", err);
+          });
+      }
+    }
 
     return (
       <AnimatePresence mode="wait">
@@ -28,8 +40,11 @@ export const WindowTitle = forwardRef<HTMLDivElement, WindowTitleProps>(
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: ANIMATION_EXIT_OFFSET }}
             transition={{ duration: 0.15, ease: "easeInOut" }}
-            className="max-w-[400px] truncate"
+            className="max-w-[400px] truncate font-medium"
             title={title}
+            onClick={(e) =>
+              handleWindowTitle(e, getWindowProcess(glazewm) ?? "")
+            }
           >
             {title}
           </motion.div>
@@ -85,4 +100,14 @@ const getWindowTitle = (glazewm: GlazeWmOutput): string | null => {
 
   // If the focused container is not a window, return workspace name
   return (focusedWorkspace && `Workspace ${focusedWorkspace.name}`) || null;
+};
+
+const getWindowProcess = (glazewm: GlazeWmOutput): string | null => {
+  const focusedContainer = glazewm.focusedContainer;
+
+  if (focusedContainer.type === ContainerType.WINDOW) {
+    return focusedContainer.processName;
+  }
+
+  return null;
 };
