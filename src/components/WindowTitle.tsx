@@ -3,9 +3,6 @@ import { AppWindowIcon } from "lucide-react";
 import { forwardRef } from "react";
 import { GlazeWmOutput } from "zebar";
 
-const SPLIT_WINDOW_PROCESS_EXCLUSIONS = ["Spotify"];
-const SPLIT_WINDOW_TITLE_REGEX = /[-—]/;
-
 interface WindowTitleProps {
   glazewm: GlazeWmOutput | null;
 }
@@ -74,6 +71,9 @@ enum ContainerType {
   WINDOW = "window",
 }
 
+const SPLIT_WINDOW_PROCESS_EXCLUSIONS = ["Spotify"];
+const SPLIT_WINDOW_TITLE_REGEX = /[-—]/;
+
 const getWindowTitle = (glazewm: GlazeWmOutput): string | null => {
   const focusedWorkspace = glazewm.focusedWorkspace;
   const focusedContainer = glazewm.focusedContainer;
@@ -98,8 +98,11 @@ const getWindowTitle = (glazewm: GlazeWmOutput): string | null => {
     return lastSplitWindowTitle;
   }
 
-  // If the focused container is not a window, return workspace name
-  return (focusedWorkspace && `Workspace ${focusedWorkspace.name}`) || null;
+  // If the focused container is not a window, return workspace displayName. If displayName is not available, fallback to workspace name.
+  const focusedWorkspaceDisplayName = focusedWorkspace.displayName
+    ? focusedWorkspace.displayName
+    : `Workspace ${focusedWorkspace.name}`;
+  return focusedWorkspaceDisplayName;
 };
 
 const getWindowProcess = (glazewm: GlazeWmOutput): string | null => {

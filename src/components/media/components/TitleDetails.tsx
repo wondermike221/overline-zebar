@@ -1,16 +1,14 @@
 import { AnimatePresence, MotionProps, motion } from "framer-motion";
-import React, { useEffect } from "react";
-import { cn } from "../../utils/cn";
+import React from "react";
 import useMeasure from "react-use-measure";
+import { cn } from "../../../utils/cn";
 
 export function TitleDetails({
   title,
   artist,
-  expanded,
 }: {
   title: string | null | undefined;
   artist: string | null | undefined;
-  expanded: boolean;
 }) {
   return (
     <div
@@ -20,13 +18,9 @@ export function TitleDetails({
           : "inline-flex items-center gap-1.5 cursor-pointer outline-none"
       )}
     >
-      <MotionText expanded={expanded} className={cn("whitespace-nowrap")}>
-        {artist}
-      </MotionText>
+      <MotionText className={cn("whitespace-nowrap")}>{artist}</MotionText>
       <p>{"-"}</p>
-      <MotionText expanded={expanded} className={cn("whitespace-nowrap")}>
-        {title}
-      </MotionText>
+      <MotionText className={cn("whitespace-nowrap")}>{title}</MotionText>
     </div>
   );
 }
@@ -40,13 +34,12 @@ const MotionText = ({
   children,
   className,
   transition = defaultExpansionTransition,
-  expanded,
+
   ...props
 }: {
   children: React.ReactNode;
   className?: string;
   transition?: MotionProps["transition"];
-  expanded: boolean;
 } & MotionProps) => {
   let [ref, { width }] = useMeasure();
 

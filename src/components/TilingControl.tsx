@@ -1,12 +1,15 @@
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Search } from "lucide-react";
 import { cn } from "../utils/cn";
-import { Button } from "./ui/Button";
+import { Button } from "./common/Button";
 import { GlazeWmOutput } from "zebar";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface TilingControlProps {
   glazewm: GlazeWmOutput | null;
 }
+
+const FLOW_LAUNCHER_PATH =
+  "C:\\Users\\msy\\AppData\\Local\\FlowLauncher\\Flow.Launcher.exe";
 
 export function TilingControl({ glazewm }: TilingControlProps) {
   if (!glazewm) return null;
@@ -26,6 +29,13 @@ export function TilingControl({ glazewm }: TilingControlProps) {
           </motion.div>
         ))}
       </AnimatePresence>
+
+      <Button
+        className="px-2"
+        onClick={() => glazewm.runCommand(`shell-exec ${FLOW_LAUNCHER_PATH}`)}
+      >
+        <Search strokeWidth={3} className="h-3 w-3" />
+      </Button>
 
       <Button
         className="h-full"

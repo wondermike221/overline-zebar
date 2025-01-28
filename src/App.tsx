@@ -4,12 +4,13 @@ import { Center } from "./components/Center";
 import { TilingControl } from "./components/TilingControl";
 import { WindowTitle } from "./components/WindowTitle";
 import { WorkspaceControls } from "./components/WorkspaceControls";
-import CurrentTrack from "./components/currentTrack";
-import { Chip } from "./components/ui/Chip";
-import { LabelType, Stat, StatRing, Thresholds } from "./components/ui/Stat";
+import { Chip } from "./components/common/Chip";
+import CurrentTrack from "./components/media";
+import Stat from "./components/stat";
+import { weatherThresholds } from "./components/stat/defaults/thresholds";
+import VolumeControl from "./components/volume";
 import { useAutoTiling } from "./utils/useAutoTiling";
 import { getWeatherIcon } from "./utils/weatherIcons";
-import VolumeControl from "./components/volumeControl";
 
 const providers = zebar.createProviderGroup({
   media: { type: "media" },
@@ -21,13 +22,6 @@ const providers = zebar.createProviderGroup({
   weather: { type: "weather" },
   audio: { type: "audio" },
 });
-
-const weatherThreshold: Thresholds = [
-  { min: -10, max: 0, label: LabelType.DANGER }, // Extremely cold (dangerous conditions)
-  { min: 1, max: 15, label: LabelType.DEFAULT }, // Typical cold to mild weather
-  { min: 16, max: 25, label: LabelType.WARNING }, // Warmer than usual
-  { min: 26, max: 35, label: LabelType.DANGER }, // Unusually hot (dangerous conditions)
-];
 
 function App() {
   const [output, setOutput] = useState(providers.outputMap);
@@ -45,7 +39,7 @@ function App() {
         <div className="flex items-center gap-2 h-full py-2">
           <TilingControl glazewm={output.glazewm} />
         </div>
-        <div className="flex items-center gap-2 h-full">
+        <div className="flex items-center gap-2 h-full py-1.5">
           <WorkspaceControls glazewm={output.glazewm} />
         </div>
         <div className="flex items-center justify-center gap-2 h-full">
@@ -76,16 +70,18 @@ function App() {
         <div className="py-1.5 h-full">
           <Chip className="flex items-center gap-3 h-full">
             {output.cpu && (
-              <StatRing
+              <Stat
                 Icon={<p className="font-medium text-icon">CPU</p>}
                 stat={`${Math.round(output.cpu.usage)}%`}
+                type="ring"
               />
             )}
 
             {output.memory && (
-              <StatRing
+              <Stat
                 Icon={<p className="font-medium text-icon">RAM</p>}
                 stat={`${Math.round(output.memory.usage)}%`}
+                type="ring"
               />
             )}
 
@@ -93,7 +89,8 @@ function App() {
               <Stat
                 Icon={getWeatherIcon(output.weather, statIconClassnames)}
                 stat={`${Math.round(output.weather.celsiusTemp)}°C`}
-                threshold={weatherThreshold}
+                threshold={weatherThresholds}
+                type="inline"
               />
             )}
           </Chip>

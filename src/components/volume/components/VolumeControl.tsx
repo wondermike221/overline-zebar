@@ -1,12 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Volume, Volume1, Volume2 } from "lucide-react";
-import { useState } from "react";
-import { cn } from "../../utils/cn";
-import { Chip } from "../ui/Chip";
-import Slider from "./Slider";
+import { useRef, useState, useEffect } from "react";
+import { cn } from "../../../utils/cn";
+import { Chip } from "../../common/Chip";
+import Slider from "../Slider";
 
 // TODO: Investigate AudioDevice type and why it's not exported. For now, just use any.
-export function VolumeControl({
+export default function VolumeControl({
   playbackDevice,
   statIconClassnames,
   setVolume,
@@ -16,6 +16,7 @@ export function VolumeControl({
   statIconClassnames: "h-3 w-3 text-icon";
 }) {
   const [expanded, setExpanded] = useState(false);
+  const ref = useRef<HTMLButtonElement>(null);
 
   const handleWheel = (e: React.WheelEvent<HTMLButtonElement>) => {
     if (!playbackDevice) return;
@@ -52,8 +53,23 @@ export function VolumeControl({
     }
   };
 
+  // Close the slider when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setExpanded(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <Chip
+      ref={ref}
       as="button"
       onClick={handleClick}
       onWheel={handleWheel}

@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { Workspace } from "glazewm";
 import { GlazeWmOutput } from "zebar";
 import { cn } from "../utils/cn";
-import { buttonStyles } from "./ui/Button";
-import { Chip } from "./ui/Chip";
+import { buttonStyles } from "./common/Button";
+import { Chip } from "./common/Chip";
 import useMeasure from "react-use-measure";
 
 interface WorkspaceControlsProps {
@@ -28,13 +28,15 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
       animate={{ width: width || "auto", opacity: 1 }}
       exit={{ width: 0, opacity: 0 }}
       transition={springConfig}
-      className="relative overflow-hidden"
+      className="relative overflow-hidden h-full"
     >
       <Chip
         className={cn(
           width ? "absolute" : "relative",
-          "flex items-center gap-1.5 px-[3px] py-[3px] select-none"
+          "flex items-center gap-1.5 px-[3px] py-[3px] select-none overflow-clip"
         )}
+        as="div"
+        ref={ref}
       >
         {glazewm.allWorkspaces?.map((workspace: Workspace, idx) => {
           const isFocused = workspace.hasFocus;

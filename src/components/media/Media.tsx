@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { MediaControlOptions, MediaSession } from "zebar";
-import { Chip } from "../ui/Chip";
-import { Status } from "./PlayPause";
-import { ConditionalPanel } from "./ConditionalPanel";
-import { TitleDetails } from "./TitleDetails";
 import { cn } from "../../utils/cn";
-import { ProgressBar } from "./ProgressBar";
+import { Chip } from "../common/Chip";
+import { ConditionalPanel } from "../common/ConditionalPanel";
+import { Status } from "./components/PlayPause";
+import { ProgressBar } from "./components/ProgressBar";
+import { TitleDetails } from "./components/TitleDetails";
 
-interface CurrentTrackProps {
+interface MediaProps {
   allSessions: MediaSession[] | undefined;
   togglePlayPause: ((options?: MediaControlOptions) => void) | undefined;
   next: ((options?: MediaControlOptions) => void) | undefined;
@@ -16,13 +16,12 @@ interface CurrentTrackProps {
 
 export const TitleDetailsMemo = React.memo(TitleDetails);
 
-export function CurrentTrack({
+export default function Media({
   allSessions,
   togglePlayPause,
   next,
   previous,
-}: CurrentTrackProps) {
-  const [expanded, setExpanded] = React.useState<boolean>(false);
+}: MediaProps) {
   const [currentSessionIdx, setCurrentSessionIdx] = React.useState<number>(0);
   const currentSession = allSessions?.[currentSessionIdx] ?? allSessions?.[0];
 
@@ -73,7 +72,6 @@ export function CurrentTrack({
           <TitleDetails
             title={currentSession?.title}
             artist={currentSession?.artist}
-            expanded={expanded}
           />
           <ProgressBar currentSession={currentSession} />
         </Chip>

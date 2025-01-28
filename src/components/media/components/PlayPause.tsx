@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDownUp, Pause, Play, SkipBack, SkipForward } from "lucide-react";
-import { usePlayPause } from "../../utils/usePlayPause";
+import { usePlayPause } from "../../../utils/usePlayPause";
 
 export enum PlayPauseState {
   Played = "played",
