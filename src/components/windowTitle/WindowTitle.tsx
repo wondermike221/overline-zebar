@@ -1,14 +1,16 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { AppWindowIcon } from "lucide-react";
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { GlazeWmOutput } from "zebar";
+import { WindowControls } from "./components/WindowControls";
 
 interface WindowTitleProps {
   glazewm: GlazeWmOutput | null;
 }
 
-export const WindowTitle = forwardRef<HTMLDivElement, WindowTitleProps>(
+export const WindowTitle = forwardRef<HTMLButtonElement, WindowTitleProps>(
   ({ glazewm }, ref) => {
+    const [show, setShow] = useState(false);
     if (!glazewm) return null;
 
     const title = getWindowTitle(glazewm);
@@ -24,46 +26,39 @@ export const WindowTitle = forwardRef<HTMLDivElement, WindowTitleProps>(
           .catch((err) => {
             console.error("Failed to copy text to clipboard:", err);
           });
+        return;
       }
+
+      setShow(!show);
     }
 
     return (
       <AnimatePresence mode="wait">
-        {title ? (
-          <motion.div
-            ref={ref}
-            key={title}
-            initial={{ opacity: 0, y: -ANIMATION_EXIT_OFFSET }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: ANIMATION_EXIT_OFFSET }}
-            transition={{ duration: 0.15, ease: "easeInOut" }}
-            className="max-w-[400px] truncate font-medium"
-            title={title}
-            onClick={(e) =>
-              handleWindowTitle(e, getWindowProcess(glazewm) ?? "")
-            }
-          >
-            {title}
-          </motion.div>
-        ) : (
-          <motion.div
-            ref={ref}
-            key="default-icon"
-            initial={{ opacity: 0, y: -ANIMATION_EXIT_OFFSET }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: ANIMATION_EXIT_OFFSET }}
-            transition={{ duration: 0.15, ease: "easeInOut" }}
-            className="flex items-center"
-          >
-            <AppWindowIcon className="h-4 w-4 text-icon" />
-          </motion.div>
-        )}
+        <motion.button
+          ref={ref}
+          key={title ?? "default-icon"}
+          initial={{ opacity: 0, y: -ANIMATION_EXIT_OFFSET }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: ANIMATION_EXIT_OFFSET }}
+          transition={{ duration: 0.15, ease: "easeInOut" }}
+          className="font-medium relative h-full flex items-center cu"
+          title={title ?? "Focused Window"}
+          onClick={(e) => handleWindowTitle(e, getWindowProcess(glazewm) ?? "")}
+        >
+          {title ?? <AppWindowIcon className="h-4 w-4 text-icon" />}
+          <WindowControls
+            glazewm={glazewm}
+            show={show}
+            setShow={setShow}
+            parentRef={ref}
+          />
+        </motion.button>
       </AnimatePresence>
     );
   }
 );
 
-enum ContainerType {
+export enum ContainerType {
   ROOT = "root",
   MONITOR = "monitor",
   WORKSPACE = "workspace",
@@ -114,3 +109,5 @@ const getWindowProcess = (glazewm: GlazeWmOutput): string | null => {
 
   return null;
 };
+
+export default WindowTitle;

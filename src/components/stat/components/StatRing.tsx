@@ -1,5 +1,5 @@
 import { cn } from "../../../utils/cn";
-import Ring from "../../common/Ring";
+import Ring from "./Ring";
 import { systemStatThresholds } from "../defaults/thresholds";
 import { LabelType } from "../types/labelType";
 import { Thresholds } from "../types/thresholds";

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MediaControlOptions, MediaSession } from "zebar";
 import { cn } from "../../utils/cn";
 import { Chip } from "../common/Chip";
 import { ConditionalPanel } from "../common/ConditionalPanel";
-import { Status } from "./components/PlayPause";
+import { Status } from "./components/Status";
 import { ProgressBar } from "./components/ProgressBar";
 import { TitleDetails } from "./components/TitleDetails";
 
@@ -23,7 +23,7 @@ export default function Media({
   previous,
 }: MediaProps) {
   const [currentSessionIdx, setCurrentSessionIdx] = React.useState<number>(0);
-  const currentSession = allSessions?.[currentSessionIdx] ?? allSessions?.[0];
+  const currentSession = allSessions?.[currentSessionIdx];
 
   const handlePlayPause = (e: React.MouseEvent, currentSessionIdx: number) => {
     const currentSession = allSessions?.[currentSessionIdx];

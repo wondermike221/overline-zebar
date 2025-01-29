@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StatusAction } from "../components/media/components/PlayPause";
+import { StatusAction } from "../components/media/components/Status";
 
 interface PlayPauseState {
   isPlaying: boolean;

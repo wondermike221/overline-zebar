@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as zebar from "zebar";
 import { Center } from "./components/Center";
 import { TilingControl } from "./components/TilingControl";
-import { WindowTitle } from "./components/WindowTitle";
+import { WindowTitle } from "./components/windowTitle/WindowTitle";
 import { WorkspaceControls } from "./components/WorkspaceControls";
 import { Chip } from "./components/common/Chip";
 import CurrentTrack from "./components/media";
@@ -34,7 +34,7 @@ function App() {
   const statIconClassnames = "h-3 w-3 text-icon";
 
   return (
-    <div className="relative flex justify-between items-center bg-background-deeper/70 backdrop-blur-3xl text-text h-full antialiased">
+    <div className="relative flex justify-between items-center bg-background-deeper/70 backdrop-blur-3xl text-text h-full antialiased select-none">
       <div className="flex items-center gap-2 h-full z-10 pl-2.5">
         <div className="flex items-center gap-2 h-full py-2">
           <TilingControl glazewm={output.glazewm} />
@@ -67,7 +67,7 @@ function App() {
           />
         </div>
 
-        <div className="py-1.5 h-full">
+        <div className="py-2.5 h-full flex items-center">
           <Chip className="flex items-center gap-3 h-full">
             {output.cpu && (
               <Stat

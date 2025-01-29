@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Volume, Volume1, Volume2 } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
-import { cn } from "../../../utils/cn";
-import { Chip } from "../../common/Chip";
-import Slider from "../Slider";
+import { cn } from "../../utils/cn";
+import { Chip } from "../common/Chip";
+import Slider from "./components/Slider";
 
 // TODO: Investigate AudioDevice type and why it's not exported. For now, just use any.
 export default function VolumeControl({
