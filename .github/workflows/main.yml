@@ -1,9 +1,7 @@
 name: Deploy
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -18,18 +16,18 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '21.2.0'
+          node-version: "21.2.0"
 
       # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Run build
+      # Run build to generate the dist folder
       - name: Build project
         run: npm run build
 
-      # Upload dist folder
-      - name: Release dist folder
+      # Upload the dist folder as an artifact after the build
+      - name: Upload dist folder
         uses: actions/upload-artifact@v2
         with:
           name: dist
