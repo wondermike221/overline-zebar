@@ -8,7 +8,25 @@ interface TilingControlProps {
   glazewm: GlazeWmOutput | null;
 }
 
-const FLOW_LAUNCHER_PATH = import.meta.env.VITE_FLOW_LAUNCHER_PATH;
+// Try to get the Flow Launcher path from environment variables, or use a default path
+const getFlowLauncherPath = () => {
+  // First check if the environment variable is available
+  if (import.meta.env.VITE_FLOW_LAUNCHER_PATH) {
+    return import.meta.env.VITE_FLOW_LAUNCHER_PATH;
+  }
+
+  // Default paths based on OS
+  // For Windows (most common Flow Launcher location)
+  const defaultWindowsPath =
+    "C:\\Program Files\\FlowLauncher\\Flow.Launcher.exe";
+  const appDataPath =
+    "C:\\Users\\%USERNAME%\\AppData\\Local\\FlowLauncher\\Flow.Launcher.exe";
+
+  // Return the default path (users can customize this in their own builds)
+  return defaultWindowsPath;
+};
+
+const FLOW_LAUNCHER_PATH = getFlowLauncherPath();
 
 export function TilingControl({ glazewm }: TilingControlProps) {
   if (!glazewm) return null;
@@ -31,7 +49,15 @@ export function TilingControl({ glazewm }: TilingControlProps) {
       </AnimatePresence>
 
       <Button
-        onClick={() => glazewm.runCommand(`shell-exec ${FLOW_LAUNCHER_PATH}`)}
+        onClick={() => {
+          if (FLOW_LAUNCHER_PATH) {
+            glazewm.runCommand(`shell-exec ${FLOW_LAUNCHER_PATH}`);
+          } else {
+            console.warn(
+              "Flow Launcher path not configured. Set VITE_FLOW_LAUNCHER_PATH in .env file."
+            );
+          }
+        }}
       >
         <Search strokeWidth={3} className="h-3 w-3" />
       </Button>

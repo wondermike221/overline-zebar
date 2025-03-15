@@ -11,13 +11,21 @@ export default defineConfig({
     {
       name: "postbuild",
       closeBundle() {
+        if (process.env.CI) {
+          console.log("Skipping zebar.exe task because this is a CI build");
+          return;
+        }
+
         const exePath = process.env.ZEBAR_EXE_PATH || "zebar.exe";
 
         try {
+          // Kill the existing zebar.exe process
           execSync(`taskkill /IM ${exePath} /F`, { stdio: "inherit" });
         } catch (err) {
           console.log(err.message);
         }
+
+        // Start the new zebar.exe process
         execSync(`start ${exePath}`, { stdio: "inherit" });
       },
     },

@@ -1,11 +1,16 @@
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { getUseAutoTiling, getAutoTilingWebSocketUri } from "./getFromEnv";
 
 export const useAutoTiling = () => {
   const queryClient = useQueryClient();
-  const uri = "ws://localhost:6123";
+  const uri = getAutoTilingWebSocketUri();
+  const isAutoTilingEnabled = getUseAutoTiling();
 
   useEffect(() => {
+    // Only connect to WebSocket if auto-tiling is enabled
+    if (!isAutoTilingEnabled) return;
+
     const websocket = new WebSocket(uri);
 
     websocket.onopen = () => {
@@ -39,10 +44,11 @@ export const useAutoTiling = () => {
     return () => {
       websocket.close();
     };
-  }, [queryClient, uri]);
+  }, [queryClient, uri, isAutoTilingEnabled]);
 
   return {
     tilingSize: queryClient.getQueryData(["tilingSize"]),
+    isAutoTilingEnabled,
   };
 };
 

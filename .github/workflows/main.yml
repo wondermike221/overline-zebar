@@ -26,7 +26,41 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # Upload the dist folder as an artifact after the build
+      # Create release folder structure
+      - name: Create release folder structure
+        run: |
+          mkdir -p overline-zebar/dist
+          cp -r dist/* overline-zebar/dist/
+          cp overline.zebar.json overline-zebar/overline-zebar.zebar.json
+
+      # Zip the release folder
+      - name: Zip release folder
+        run: zip -r overline-zebar.zip overline-zebar
+
+      # Create GitHub Release
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      # Upload Release Asset
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./overline-zebar.zip
+          asset_name: overline-zebar.zip
+          asset_content_type: application/zip
+
+      # Upload the dist folder as an artifact after the build (keeping this for reference)
       - name: Upload dist folder
         uses: actions/upload-artifact@v4
         with:
