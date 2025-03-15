@@ -30,18 +30,22 @@ A fully-featured custom widget for [zebar](https://github.com/glzr-io/zebar).
 git clone https://github.com/mushfikurr/overline-zebar.git
 ```
 
-### 2. Create a `.env` File
+### 2. Environment Variables (Optional)
 
-Create a `.env` file in the root directory and define the following variables:
+You can customize behavior by creating a `.env` file in the root directory with these variables:
 
 ```sh
 VITE_FLOW_LAUNCHER_PATH=
 VITE_USE_AUTOTILING=
+VITE_AUTOTILING_WEBSOCKET_URI=
 ```
 
-- **`VITE_FLOW_LAUNCHER_PATH`**: Path to an `.exe` file executed when clicking the search icon (default is Flow Launcher, but any executable works).
-- **`VITE_USE_AUTOTILING`**: Set to `true` or `false`.
+- **`VITE_FLOW_LAUNCHER_PATH`**: Path to an `.exe` file executed when clicking the search icon (default: `C:\Program Files\FlowLauncher\Flow.Launcher.exe`).
+- **`VITE_USE_AUTOTILING`**: Set to `true` or `false` (default: `false`).
   - If `true`, new windows will automatically switch tiling directions based on the size of the focused window.
+- **`VITE_AUTOTILING_WEBSOCKET_URI`**: WebSocket URI for auto-tiling functionality (default: `ws://localhost:6123`).
+
+**Note:** All environment variables have sensible defaults, so the `.env` file is optional.
 
 ---
 
@@ -59,7 +63,6 @@ VITE_USE_AUTOTILING=
    ```sh
    npm run build
    ```
-   _(Exit after build completion if you are not making live changes.)_
 4. Locate the built widget in the `dist/` folder.
 5. Configure Zebar to use `dist/index.html` in its `.json` settings file.
 
@@ -85,7 +88,7 @@ Fonts are defined in [`src/styles/fonts.css`](src/styles/fonts.css).
 
 1. Start the build process:
    ```sh
-   npm run build
+   npm run build:watch
    ```
 2. Edit code — Zebar will automatically restart on save (if the widget is selected in Zebar).
 3. Enable auto-save in your text editor for faster iteration.
