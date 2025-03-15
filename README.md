@@ -1,58 +1,97 @@
-# overline-zebar
+# Overline-Zebar
+
 A fully-featured custom widget for [zebar](https://github.com/glzr-io/zebar).
 
-Features:
-- Media overview & controls:
-  - Play/pause:
-    - Click to play/pause or:
-      - Shift + click to go to previous track.
-      - Ctrl + click to go to next track.
-- Workspace display:
-  - Click to focus workspace or:
-    - Scroll to switch workspace.
-- Search and tiling direction buttons.
-- Volume control:
-  - Click to open slider or:
-    - Scroll to change volume.
-    - Shift + click to toggle mute.
-- Current window display:
-  - Click to reveal window controls, hovering will show what the control does.
+## Features
 
-## Setup for use
-- Clone the repostiory `git clone https://github.com/msy-dev/overline-zebar.git`
-- Create an .env file in the root folder with the following content:
+- **Media Controls**
+  - Click to **play/pause**.
+  - Shift + Click to **go to the previous track**.
+  - Ctrl + Click to **go to the next track**.
+- **Workspace Display**
+  - Click to **focus on a workspace**.
+  - Scroll to **switch between workspaces**.
+- **Search & Tiling Direction Controls**
+- **Volume Control**
+  - Click to **open volume slider**.
+  - Scroll to **adjust volume**.
+  - Shift + Click to **toggle mute**.
+- **Current Window Display**
+  - Click to **reveal window controls**.
+  - Hover over controls to see their function.
 
+---
+
+## Installation
+
+### 1. Clone the Repository
+
+```sh
+git clone https://github.com/mushfikurr/overline-zebar.git
 ```
+
+### 2. Create a `.env` File
+
+Create a `.env` file in the root directory and define the following variables:
+
+```sh
 VITE_FLOW_LAUNCHER_PATH=
 VITE_USE_AUTOTILING=
 ```
 
-- `VITE_FLOW_LAUNCHER_PATH` can be any .exe file to execute when clicking the search icon on the top left, it does not have to be Flow Launcher.
-- `VITE_USE_AUTOTILING` can be set to true or false, if set to true, new windows will automatically switch between tiling directions based on the tiling size of the focused window.
+- **`VITE_FLOW_LAUNCHER_PATH`**: Path to an `.exe` file executed when clicking the search icon (default is Flow Launcher, but any executable works).
+- **`VITE_USE_AUTOTILING`**: Set to `true` or `false`.
+  - If `true`, new windows will automatically switch tiling directions based on the size of the focused window.
 
-### Using with zebar
+---
 
-- Copy the folder to the zebar widget folder i.e. `(C:\Users\<username>\.glzr\zebar\)`
-- Run `npm install`
-- Run `npm run build` (exit it if you are not making live changes)
-- Usable widget will be in `dist/` folder
-- Point your .json to the `dist/index.html` file (the default should be ok)
+## Usage with Zebar
 
-### Changing fonts
-Fonts are defined in `src/styles/fonts.css`, you can use system fonts directly or download the fonts to the public/ folder, referencing them in the `src/styles/fonts.css` file.
+1. Copy the project folder to the Zebar widget directory:
+   ```
+   C:\Users\<username>\.glzr\zebar\
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Build the project:
+   ```sh
+   npm run build
+   ```
+   _(Exit after build completion if you are not making live changes.)_
+4. Locate the built widget in the `dist/` folder.
+5. Configure Zebar to use `dist/index.html` in its `.json` settings file.
 
-[fonts reference](https://developer.mozilla.org/en-US/docs/Web/CSS/font)
+---
 
-## Changing colours
+## Customization
 
-- Edit tailwind.config.js
+### Fonts
 
-## Change font
+Fonts are defined in [`src/styles/fonts.css`](src/styles/fonts.css).
 
+- Use system fonts directly.
+- Or, download fonts to the `public/` folder and reference them in `fonts.css`.
+- [Font reference](https://developer.mozilla.org/en-US/docs/Web/CSS/font).
 
+### Colors
 
-## Hot reload for development
+- Edit [`tailwind.config.js`](tailwind.config.js) to customize colors.
 
-- Run npm run build
-- Edit code and it will restart zebar on code save (make sure the widget is selected in zebar)
-- Enable auto-save on text editor to help with this
+---
+
+## Development & Hot Reload
+
+1. Start the build process:
+   ```sh
+   npm run build
+   ```
+2. Edit code — Zebar will automatically restart on save (if the widget is selected in Zebar).
+3. Enable auto-save in your text editor for faster iteration.
+
+---
+
+### Contributions
+
+Pull requests are welcome! If you find any issues or have feature suggestions, feel free to open an issue on GitHub.
