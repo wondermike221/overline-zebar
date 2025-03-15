@@ -16,7 +16,7 @@ export default {
          *   - Current workspace indicator
          *   - Volume slider
          *   - Media progress bar
-        */
+         */
         primary: "oklch(0.542 0.041 248.7)",
         "primary-border": "oklch(0.623 0.047 248.7)",
         text: "oklch(0.950 0.003 261.7)",
