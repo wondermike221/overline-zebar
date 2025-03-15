@@ -38,14 +38,18 @@ VITE_USE_AUTOTILING=
 - Usable widget will be in `dist/` folder
 - Point your .json to the `dist/index.html` file (the default should be ok)
 
+### Changing fonts
+Fonts are defined in `src/styles/fonts.css`, you can use system fonts directly or download the fonts to the public/ folder, referencing them in the `src/styles/fonts.css` file.
+
+[fonts reference](https://developer.mozilla.org/en-US/docs/Web/CSS/font)
+
 ## Changing colours
 
 - Edit tailwind.config.js
 
 ## Change font
 
-Fonts are defined in `src/styles/fonts.css`, you can use system fonts directly or download the fonts to the public/ folder, referencing them in the `src/styles/fonts.css` file.
-[fonts reference](https://developer.mozilla.org/en-US/docs/Web/CSS/font)
+
 
 ## Hot reload for development
 
