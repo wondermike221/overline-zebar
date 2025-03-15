@@ -28,7 +28,7 @@ jobs:
 
       # Upload the dist folder as an artifact after the build
       - name: Upload dist folder
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: dist
           path: dist/
