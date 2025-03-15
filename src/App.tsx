@@ -31,11 +31,14 @@ function App() {
     providers.onOutput(() => setOutput(providers.outputMap));
   }, []);
 
-  useAutoTiling();
+  console.log(import.meta.env.VITE_USE_AUTOTILING);
+  if (import.meta.env.VITE_USE_AUTOTILING === "true") {
+    useAutoTiling();
+  }
   const statIconClassnames = "h-3 w-3 text-icon";
 
   return (
-    <div className="relative flex justify-between items-center bg-background backdrop-blur-3xl text-text h-full antialiased select-none border rounded-lg border-app-border/30 font-mono py-1.5">
+    <div className="relative flex justify-between items-center bg-background backdrop-blur-3xl text-text h-full antialiased select-none border rounded-lg border-border font-mono py-1.5">
       <div className="flex items-center gap-2 h-full z-10 pl-1.5">
         <div className="flex items-center gap-1.5 h-full">
           <TilingControl glazewm={output.glazewm} />

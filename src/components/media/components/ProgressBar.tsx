@@ -38,7 +38,7 @@ export function ProgressBar({
 
   return (
     <div
-      className="absolute h-[1.5px] bg-background-subtle bottom-0 left-0 transition-[width] duration-200 ease-out"
+      className="absolute h-[1.5px] bg-primary bottom-0 left-0 transition-[width] duration-200 ease-out"
       style={{
         width: currentSession
           ? `${(progress / currentSession?.endTime) * 100 || 0}%`

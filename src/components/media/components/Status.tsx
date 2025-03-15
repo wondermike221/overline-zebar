@@ -49,5 +49,5 @@ function getIcon(trackAction: StatusAction | null, isPlaying: boolean) {
 }
 
 const PlayPauseIcon = ({ LucideIcon }: { LucideIcon: React.ElementType }) => (
-  <LucideIcon className="text-icon h-3 w-3" strokeWidth={2.5} />
+  <LucideIcon className="text-icon h-3 w-3" strokeWidth={3} />
 );

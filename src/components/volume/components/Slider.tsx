@@ -55,9 +55,9 @@ export default function Slider({
           overflow.set(0);
         }}
       >
-        <RadixSlider.Track className="relative isolate h-2 w-full rounded-full bg-background-subtle/10">
+        <RadixSlider.Track className="relative isolate h-2 w-full rounded-full bg-background border border-border">
           <RadixSlider.Range
-            className="absolute h-full bg-background-subtle rounded-full"
+            className="absolute h-full bg-primary rounded-full"
             style={{
               width: `${value}%`,
             }}

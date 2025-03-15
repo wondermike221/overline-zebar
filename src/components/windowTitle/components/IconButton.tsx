@@ -30,8 +30,8 @@ export const IconButton = ({
   return (
     <button
       className={cn(
-        "h-full flex items-center justify-center text-icon/80",
-        "hover:text-icon",
+        "h-full flex items-center justify-center text-icon",
+        "hover:text-text",
         "transition-colors duration-200 ease-in-out"
       )}
       {...props}

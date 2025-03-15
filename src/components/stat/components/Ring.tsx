@@ -4,16 +4,14 @@ const Ring = ({
   percentage,
   className,
   strokeColor = "stroke-green-500",
-  backgroundColor = "stroke-background-subtle/10",
+  backgroundColor = "stroke-background",
   strokeWidth = 14,
-  borderColor = "stroke-text/5",
 }: {
   percentage: number;
   className?: string;
   strokeColor?: string;
   backgroundColor?: string;
   strokeWidth?: number;
-  borderColor?: string;
 }) => {
   const size = 100;
   const radius = size / 2 - strokeWidth;
@@ -34,7 +32,6 @@ const Ring = ({
           cx="50"
           cy="50"
           r={radius + strokeWidth / 2}
-          className={cn(borderColor)}
           strokeWidth={strokeWidth}
           fill="none"
         />

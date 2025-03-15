@@ -8,8 +8,7 @@ interface TilingControlProps {
   glazewm: GlazeWmOutput | null;
 }
 
-const FLOW_LAUNCHER_PATH =
-  "C:\\Users\\msy\\AppData\\Local\\FlowLauncher\\Flow.Launcher.exe";
+const FLOW_LAUNCHER_PATH = import.meta.env.VITE_FLOW_LAUNCHER_PATH;
 
 export function TilingControl({ glazewm }: TilingControlProps) {
   if (!glazewm) return null;
@@ -40,7 +39,7 @@ export function TilingControl({ glazewm }: TilingControlProps) {
       <Button onClick={() => glazewm.runCommand("toggle-tiling-direction")}>
         <ChevronRight
           className={cn(
-            "h-3 w-3 text-text transition duration-200 ease-in-out",
+            "h-3 w-3 transition-transform duration-200 ease-in-out",
             glazewm.tilingDirection === "vertical" ? "rotate-90" : ""
           )}
           strokeWidth={3}

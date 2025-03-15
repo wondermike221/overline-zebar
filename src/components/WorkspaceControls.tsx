@@ -63,10 +63,10 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
                 glazewm.runCommand(`focus --workspace ${workspace.name}`)
               }
               className={cn(
-                "relative rounded-xl px-2 transition duration-500 ease-in-out text-text/80 h-full",
+                "relative rounded-xl px-2 transition duration-500 ease-in-out text-text-muted h-full",
                 isFocused ? "" : "hover:text-text",
                 isFocused &&
-                  "text-icon duration-700 transition-all ease-in-out font-medium"
+                  "text-text duration-700 transition-all ease-in-out font-medium"
               )}
               style={{
                 WebkitTapHighlightColor: "transparent",
@@ -81,8 +81,8 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
                   layoutId="bubble"
                   className={cn(
                     buttonStyles,
-                    "bg-background-subtle/70 border-text/10 drop-shadow-sm rounded-[0.5rem] absolute inset-0 -z-10",
-                    isFocused && "hover:bg-background-subtle"
+                    "bg-primary border-primary-border drop-shadow-sm rounded-[0.5rem] absolute inset-0 -z-10",
+                    isFocused && "hover:bg-primary"
                   )}
                   transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 />
