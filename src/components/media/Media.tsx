@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { MediaControlOptions, MediaSession } from "zebar";
 import { cn } from "../../utils/cn";
 import { Chip } from "../common/Chip";
 import { ConditionalPanel } from "../common/ConditionalPanel";
-import { Status } from "./components/Status";
 import { ProgressBar } from "./components/ProgressBar";
+import { Status } from "./components/Status";
 import { TitleDetails } from "./components/TitleDetails";
 
 interface MediaProps {
@@ -55,7 +55,7 @@ export default function Media({
   return (
     <button
       className={
-        "h-full flex gap-2 select-none cursor-pointer outline-none relative py-1.5"
+        "flex gap-2 select-none cursor-pointer outline-none relative h-full"
       }
       onClick={(e) => {
         handlePlayPause(e, currentSessionIdx);
@@ -64,7 +64,7 @@ export default function Media({
       <ConditionalPanel sessionActive={!!currentSession}>
         <Chip
           className={cn(
-            "relative flex gap-2 select-none cursor-pointer py-[0.18rem] overflow-clip group",
+            "relative flex gap-2 select-none cursor-pointer overflow-clip group",
             "active:bg-background-deeper/90"
           )}
         >

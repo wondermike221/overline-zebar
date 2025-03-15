@@ -17,6 +17,9 @@ export default {
         danger: "#bf616a",
         warning: "#d08770",
       },
+      fontFamily: {
+        mono: ["Geist Mono", "monospace"],
+      },
     },
   },
   plugins: [twGlow],

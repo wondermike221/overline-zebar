@@ -1,12 +1,18 @@
 import { LucideIcon } from "lucide-react";
 import { cn } from "../../../utils/cn";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  HTMLMotionProps,
+  animate,
+} from "framer-motion";
 import React from "react";
 
 interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: LucideIcon;
   animateKey?: string;
+  animateProps?: HTMLMotionProps<"div">;
 }
 
 // TODO: Shares same animation as Status. Maybe extract to a component?
@@ -14,10 +20,11 @@ interface IconButtonProps
 export const IconButton = ({
   icon: Icon,
   animateKey,
+  animateProps,
   ...props
 }: IconButtonProps) => {
   const renderInner = (Icon: LucideIcon) => (
-    <Icon className="h-3.5 w-3.5" strokeWidth={3} />
+    <Icon className="h-3 w-3" strokeWidth={3} />
   );
 
   return (
@@ -36,7 +43,10 @@ export const IconButton = ({
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1.1 }} // 1.1 to mitigate the blurry icon
             exit={{ opacity: 0, scale: 0.5 }}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.2 }}
+            {...animateProps}
           >
             {renderInner(Icon)}
           </motion.div>

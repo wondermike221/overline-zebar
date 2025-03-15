@@ -30,7 +30,7 @@ export function StatInline({
   return (
     <div
       className={cn(
-        "flex items-center justify-center gap-1.5 h-full",
+        "flex items-center justify-center gap-1.5",
         thresholdLabel === LabelType.DEFAULT && "text-text",
         thresholdLabel === LabelType.WARNING && "text-warning",
         thresholdLabel === LabelType.DANGER && "text-danger"

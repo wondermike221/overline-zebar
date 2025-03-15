@@ -1,5 +1,4 @@
 import { Eye } from "lucide-react";
-import { cn } from "../../../../utils/cn";
 import { IconButton } from "../IconButton";
 import { CommandProps } from "./types/command";
 
@@ -9,6 +8,7 @@ export const Transparency = ({ glazewm }: CommandProps) => {
 
   return (
     <IconButton
+      animateKey={command}
       key={command}
       title={tooltipText}
       onClick={() => glazewm?.runCommand(command)}

@@ -12,6 +12,7 @@ interface WorkspaceControlsProps {
 
 export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
   if (!glazewm) return null;
+  const workspaces = glazewm.allWorkspaces;
 
   const [ref, { width }] = useMeasure();
   const springConfig = {
@@ -19,6 +20,20 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
     stiffness: 120,
     damping: 20,
     mass: 0.8,
+  };
+
+  const handleWheel = (e: React.WheelEvent<HTMLButtonElement>) => {
+    const delta = e.deltaY > 0 ? 1 : -1;
+    const workspaceName = workspaces.indexOf(glazewm.focusedWorkspace);
+    const newWorkspaceName = workspaces[workspaceName + delta]?.name;
+
+    if (workspaces[workspaceName + delta]) {
+      glazewm.runCommand(`focus --workspace ${newWorkspaceName}`);
+    } else {
+      const command =
+        delta > 0 ? "focus --next-workspace" : "focus --prev-workspace";
+      glazewm.runCommand(command);
+    }
   };
 
   return (
@@ -33,10 +48,11 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
       <Chip
         className={cn(
           width ? "absolute" : "relative",
-          "flex items-center gap-1.5 px-[2px] py-[4px] select-none overflow-clip"
+          "flex items-center gap-1.5 select-none overflow-hidden px-[1px] h-full"
         )}
         as="div"
         ref={ref}
+        onWheel={handleWheel}
       >
         {glazewm.allWorkspaces?.map((workspace: Workspace, idx) => {
           const isFocused = workspace.hasFocus;
@@ -47,22 +63,25 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
                 glazewm.runCommand(`focus --workspace ${workspace.name}`)
               }
               className={cn(
-                "relative rounded-xl px-2 transition duration-500 ease-in-out text-text/80",
+                "relative rounded-xl px-2 transition duration-500 ease-in-out text-text/80 h-full",
                 isFocused ? "" : "hover:text-text",
-                isFocused && "text-text font-medium"
+                isFocused &&
+                  "text-icon duration-700 transition-all ease-in-out font-medium"
               )}
               style={{
                 WebkitTapHighlightColor: "transparent",
               }}
             >
-              <p className="z-10">{workspace.displayName ?? workspace.name}</p>
+              <p className={cn("z-10")}>
+                {workspace.displayName ?? workspace.name}
+              </p>
 
               {isFocused && (
                 <motion.span
                   layoutId="bubble"
                   className={cn(
                     buttonStyles,
-                    "bg-background-subtle border-text/20 drop-shadow-sm mix-blend-overlay rounded-xl absolute inset-0",
+                    "bg-background-subtle/70 border-text/10 drop-shadow-sm rounded-[0.5rem] absolute inset-0 -z-10",
                     isFocused && "hover:bg-background-subtle"
                   )}
                   transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}

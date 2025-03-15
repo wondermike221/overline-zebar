@@ -1,8 +1,15 @@
-# React + Vite
+# nord-darker-wdiget
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+change colours:
+- edit tailwind.config.js:
 
-Currently, two official plugins are available:
+hot reload while developing:
+- run npm run build
+- edit code and it will restart zebar on code save
+- enable auto-save on text editor to help with this
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+building: 
+- run npm install
+- run npm run build (exit it if you are not making live changes)
+- usable widget will be in dist folder
+- point your .json to the dist folder

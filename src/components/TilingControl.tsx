@@ -24,6 +24,7 @@ export function TilingControl({ glazewm }: TilingControlProps) {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.15, ease: "easeInOut" }}
             exit={{ opacity: 0 }}
+            className="h-full"
           >
             <Button>{bindingMode.displayName ?? bindingMode.name}</Button>
           </motion.div>
@@ -31,19 +32,15 @@ export function TilingControl({ glazewm }: TilingControlProps) {
       </AnimatePresence>
 
       <Button
-        className="px-2"
         onClick={() => glazewm.runCommand(`shell-exec ${FLOW_LAUNCHER_PATH}`)}
       >
         <Search strokeWidth={3} className="h-3 w-3" />
       </Button>
 
-      <Button
-        className="h-full"
-        onClick={() => glazewm.runCommand("toggle-tiling-direction")}
-      >
+      <Button onClick={() => glazewm.runCommand("toggle-tiling-direction")}>
         <ChevronRight
           className={cn(
-            "h-3 w-4 text-text transition duration-200 ease-in-out",
+            "h-3 w-3 text-text transition duration-200 ease-in-out",
             glazewm.tilingDirection === "vertical" ? "rotate-90" : ""
           )}
           strokeWidth={3}

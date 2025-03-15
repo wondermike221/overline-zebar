@@ -73,7 +73,7 @@ export default function VolumeControl({
       as="button"
       onClick={handleClick}
       onWheel={handleWheel}
-      className="outline-none h-full"
+      className="outline-none px-2 pr-2.5"
     >
       <div className="flex items-center">
         <div>{renderIcon()}</div>

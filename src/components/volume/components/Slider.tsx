@@ -44,7 +44,7 @@ export default function Slider({
         onValueChange={([v]) => setValue(Math.floor(v))}
         onClick={(e) => e.stopPropagation()}
         step={0.01}
-        className="relative flex w-full cursor-grab touch-none select-none rounded-full items-center py-4 active:cursor-grabbing"
+        className="relative flex w-full cursor-grab touch-none select-none rounded-full items-center active:cursor-grabbing"
         onPointerMove={(e) => {
           e.stopPropagation();
           if (e.buttons > 0) {
