@@ -1,6 +1,8 @@
-# Overline-Zebar
+# overline-zebar
 
 A fully-featured custom widget for [zebar](https://github.com/glzr-io/zebar).
+
+![Screenshot of overline-zebar in use with GlazeWM, with Zen Browser underneath](https://github.com/user-attachments/assets/333feb9c-225d-4be9-84db-cbdc7010e698)
 
 ## Features
 
