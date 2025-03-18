@@ -12,7 +12,7 @@ interface WorkspaceControlsProps {
 
 export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
   if (!glazewm) return null;
-  const workspaces = glazewm.allWorkspaces;
+  const workspaces = glazewm.currentWorkspaces;
 
   const [ref, { width }] = useMeasure();
   const springConfig = {
@@ -54,7 +54,7 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
         ref={ref}
         onWheel={handleWheel}
       >
-        {glazewm.allWorkspaces?.map((workspace: Workspace, idx) => {
+        {workspaces.map((workspace: Workspace, idx) => {
           const isFocused = workspace.hasFocus;
           return (
             <button
