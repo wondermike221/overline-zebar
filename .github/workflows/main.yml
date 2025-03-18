@@ -2,6 +2,11 @@ name: Deploy
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: "Version number for release"
+        required: true
+        default: "v1.0.0"
 
 jobs:
   build-and-deploy:
@@ -37,15 +42,15 @@ jobs:
       - name: Zip release folder
         run: zip -r overline-zebar.zip overline-zebar
 
-      # Create GitHub Release
+      # Create GitHub Release with the specified version
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ github.run_number }}
-          release_name: Release v${{ github.run_number }}
+          tag_name: ${{ github.event.inputs.version }}
+          release_name: Release ${{ github.event.inputs.version }}
           draft: false
           prerelease: false
 
