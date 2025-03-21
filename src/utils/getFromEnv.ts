@@ -1,61 +1,104 @@
-/**
- * Utility function to safely retrieve environment variables with fallback values
- * Handles the boilerplate of checking for environment variables and providing defaults
- */
+interface Config {
+  [key: string]: string | boolean | number;
+}
 
-/**
- * Get a string value from environment variables with a fallback
- * @param key - The environment variable key to look for (without the VITE_ prefix)
- * @param fallback - The default value to use if the environment variable is not set
- * @returns The environment variable value or the fallback
- */
-export const getStringFromEnv = (key: string, fallback: string): string => {
-  const fullKey = `VITE_${key}`;
-  return import.meta.env[fullKey] || fallback;
+const loadConfig = async (): Promise<Config> => {
+  try {
+    // Use import.meta.env.BASE_URL to ensure correct path resolution in all environments
+    const configPath = `${import.meta.env.BASE_URL}config.json`;
+    console.info(`Attempting to load config from: ${configPath}`);
+
+    const response = await fetch(configPath);
+    if (!response.ok) {
+      console.warn(
+        `Config file not found or inaccessible at ${configPath}, status: ${response.status}, using default values`
+      );
+      return {};
+    }
+
+    const config = await response.json();
+    console.info(
+      `Successfully loaded config with keys: ${Object.keys(config).join(", ")}`
+    );
+    return config;
+  } catch (error) {
+    console.error("Error loading config.json, using default values:", error);
+    return {};
+  }
 };
 
 /**
- * Get a boolean value from environment variables with a fallback
- * @param key - The environment variable key to look for (without the VITE_ prefix)
- * @param fallback - The default value to use if the environment variable is not set
- * @returns The environment variable value as a boolean or the fallback
+ * Get a string value from the config file with a fallback
+ * @param key - The key to look for in the config
+ * @param fallback - The default value to use if the key is not found in the config
+ * @returns The config value or the fallback
  */
-export const getBooleanFromEnv = (key: string, fallback: boolean): boolean => {
-  const fullKey = `VITE_${key}`;
-  const value = import.meta.env[fullKey];
-  
+export const getStringFromConfig = async (
+  key: string,
+  fallback: string
+): Promise<string> => {
+  const config = await loadConfig();
+  const value = config[key];
+  if (typeof value === "string") {
+    return value;
+  }
+  return fallback;
+};
+
+/**
+ * Get a boolean value from the config file with a fallback
+ * @param key - The key to look for in the config
+ * @param fallback - The default value to use if the key is not found in the config
+ * @returns The config value as a boolean or the fallback
+ */
+export const getBooleanFromConfig = async (
+  key: string,
+  fallback: boolean
+): Promise<boolean> => {
+  const config = await loadConfig();
+  const value = config[key];
+
   if (value === undefined) return fallback;
-  if (typeof value === 'boolean') return value;
-  
+  if (typeof value === "boolean") return value;
+
   // Handle string values like 'true', 'false'
-  return value === 'true' || value === '1';
+  return value === "true" || value === "1";
 };
 
 /**
- * Get a number value from environment variables with a fallback
- * @param key - The environment variable key to look for (without the VITE_ prefix)
- * @param fallback - The default value to use if the environment variable is not set
- * @returns The environment variable value as a number or the fallback
+ * Get a number value from the config file with a fallback
+ * @param key - The key to look for in the config
+ * @param fallback - The default value to use if the key is not found in the config
+ * @returns The config value as a number or the fallback
  */
-export const getNumberFromEnv = (key: string, fallback: number): number => {
-  const fullKey = `VITE_${key}`;
-  const value = import.meta.env[fullKey];
-  
+export const getNumberFromConfig = async (
+  key: string,
+  fallback: number
+): Promise<number> => {
+  const config = await loadConfig();
+  const value = config[key];
+
   if (value === undefined) return fallback;
-  
+
   const parsed = Number(value);
   return isNaN(parsed) ? fallback : parsed;
 };
 
-// Common environment variables used in the application
-export const getFlowLauncherPath = (): string => {
-  return getStringFromEnv('FLOW_LAUNCHER_PATH', 'C:\\Program Files\\FlowLauncher\\Flow.Launcher.exe');
+// Common configuration values used in the application
+export const getFlowLauncherPath = async (): Promise<string> => {
+  return await getStringFromConfig(
+    "FLOW_LAUNCHER_PATH",
+    "C:\\Program Files\\FlowLauncher\\Flow.Launcher.exe"
+  );
 };
 
-export const getUseAutoTiling = (): boolean => {
-  return getBooleanFromEnv('USE_AUTOTILING', false);
+export const getUseAutoTiling = async (): Promise<boolean> => {
+  return await getBooleanFromConfig("USE_AUTOTILING", false);
 };
 
-export const getAutoTilingWebSocketUri = (): string => {
-  return getStringFromEnv('AUTOTILING_WEBSOCKET_URI', 'ws://localhost:6123');
+export const getAutoTilingWebSocketUri = async (): Promise<string> => {
+  return await getStringFromConfig(
+    "AUTOTILING_WEBSOCKET_URI",
+    "ws://localhost:6123"
+  );
 };
