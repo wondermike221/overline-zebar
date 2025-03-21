@@ -72,7 +72,14 @@ function App() {
         </div>
 
         <div className="flex items-center h-full">
-          <Chip className="flex items-center gap-3 h-full">
+          {/* TODO: Extract to component */}
+          <Chip
+            className="flex items-center gap-3 h-full"
+            as="button"
+            onClick={() => {
+              output.glazewm?.runCommand("shell-exec taskmgr");
+            }}
+          >
             {output.cpu && (
               <Stat
                 Icon={<p className="font-medium text-icon">CPU</p>}
