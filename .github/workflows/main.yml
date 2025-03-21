@@ -37,6 +37,8 @@ jobs:
           mkdir -p overline-zebar/dist
           cp -r dist/* overline-zebar/dist/
           cp overline.zebar.json overline-zebar/overline.zebar.json
+          mkdir -p overline-zebar/dist/public
+          cp public/release-config.json overline-zebar/dist/public/config.json
 
       # Zip the release folder
       - name: Zip release folder

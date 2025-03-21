@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import * as zebar from "zebar";
 import { Center } from "./components/Center";
-import { TilingControl } from "./components/TilingControl";
-import { WindowTitle } from "./components/windowTitle/WindowTitle";
-import { WorkspaceControls } from "./components/WorkspaceControls";
 import { Chip } from "./components/common/Chip";
 import CurrentTrack from "./components/media";
 import Stat from "./components/stat";
 import { weatherThresholds } from "./components/stat/defaults/thresholds";
+import { TilingControl } from "./components/TilingControl";
 import VolumeControl from "./components/volume";
+import { WindowTitle } from "./components/windowTitle/WindowTitle";
+import { WorkspaceControls } from "./components/WorkspaceControls";
+import "./styles/fonts.css";
 import { useAutoTiling } from "./utils/useAutoTiling";
 import { getWeatherIcon } from "./utils/weatherIcons";
-import "./styles/fonts.css";
 
 const providers = zebar.createProviderGroup({
   media: { type: "media" },
@@ -31,10 +31,8 @@ function App() {
     providers.onOutput(() => setOutput(providers.outputMap));
   }, []);
 
-  console.log(import.meta.env.VITE_USE_AUTOTILING);
-  if (import.meta.env.VITE_USE_AUTOTILING === "true") {
-    useAutoTiling();
-  }
+  useAutoTiling();
+
   const statIconClassnames = "h-3 w-3 text-icon";
 
   return (
