@@ -3,32 +3,15 @@ import { cn } from "../utils/cn";
 import { Button } from "./common/Button";
 import { GlazeWmOutput } from "zebar";
 import { motion, AnimatePresence } from "framer-motion";
+import { useConfig } from "../context/ConfigContext";
 
 interface TilingControlProps {
   glazewm: GlazeWmOutput | null;
 }
 
-// Try to get the Flow Launcher path from environment variables, or use a default path
-const getFlowLauncherPath = () => {
-  // First check if the environment variable is available
-  if (import.meta.env.VITE_FLOW_LAUNCHER_PATH) {
-    return import.meta.env.VITE_FLOW_LAUNCHER_PATH;
-  }
-
-  // Default paths based on OS
-  // For Windows (most common Flow Launcher location)
-  const defaultWindowsPath =
-    "C:\\Program Files\\FlowLauncher\\Flow.Launcher.exe";
-  const appDataPath =
-    "C:\\Users\\%USERNAME%\\AppData\\Local\\FlowLauncher\\Flow.Launcher.exe";
-
-  // Return the default path (users can customize this in their own builds)
-  return defaultWindowsPath;
-};
-
-const FLOW_LAUNCHER_PATH = getFlowLauncherPath();
-
 export function TilingControl({ glazewm }: TilingControlProps) {
+  const { flowLauncherPath, isLoading } = useConfig();
+  
   if (!glazewm) return null;
 
   return (
@@ -50,12 +33,13 @@ export function TilingControl({ glazewm }: TilingControlProps) {
 
       <Button
         onClick={() => {
-          if (FLOW_LAUNCHER_PATH) {
-            glazewm.runCommand(`shell-exec ${FLOW_LAUNCHER_PATH}`);
+          if (flowLauncherPath && !isLoading) {
+            console.log("Flow Launcher path:", flowLauncherPath);
+            glazewm.runCommand(`shell-exec ${flowLauncherPath}`);
+          } else if (isLoading) {
+            console.warn("Configuration is still loading...");
           } else {
-            console.warn(
-              "Flow Launcher path not configured. Set VITE_FLOW_LAUNCHER_PATH in .env file."
-            );
+            console.warn("Flow Launcher path not configured in config.json");
           }
         }}
       >
