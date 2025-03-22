@@ -44,7 +44,7 @@ const MotionText = ({
   let [ref, { width }] = useMeasure();
 
   return (
-    <AnimatePresence initial={false} mode="popLayout">
+    <AnimatePresence mode="popLayout">
       <motion.p
         className={cn("whitespace-nowrap overflow-hidden truncate", className)}
         ref={ref}
