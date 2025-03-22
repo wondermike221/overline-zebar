@@ -2,7 +2,6 @@ import React from "react";
 import { GlazeWmOutput } from "zebar";
 import { Chip } from "../../common/Chip";
 import { ConditionalPanel } from "../../common/ConditionalPanel";
-import { Transparency } from "./commands/Transparency";
 import { CopyProcessName } from "./commands/CopyProcessName";
 import { ToggleFloating } from "./commands/CycleFocus";
 
@@ -40,7 +39,7 @@ export function WindowControls({ glazewm, ...props }: WindowControlsProps) {
  * I am currently avoiding tracking any state locally and then replicating it to GlazeWM, as it could cause desync issues.
  */
 const ControlList = ({ glazewm }: { glazewm: GlazeWmOutput | null }) => {
-  const controls = [Transparency, CopyProcessName, ToggleFloating];
+  const controls = [CopyProcessName, ToggleFloating];
 
   return (
     <div className="flex items-center gap-1.5">
