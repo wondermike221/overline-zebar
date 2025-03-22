@@ -1,6 +1,5 @@
 import { AnimatePresence, MotionProps, motion } from "framer-motion";
 import React from "react";
-import useMeasure from "react-use-measure";
 import { cn } from "../../../utils/cn";
 
 export function TitleDetails({
@@ -10,17 +9,23 @@ export function TitleDetails({
   title: string | null | undefined;
   artist: string | null | undefined;
 }) {
+  const artistKey = artist ?? undefined;
+  const titleKey = title ?? undefined;
+
   return (
     <div
       className={cn(
-        !title && !artist
-          ? "invisible"
-          : "inline-flex items-center gap-1.5 cursor-pointer outline-none"
+        "inline-flex items-center gap-1.5 cursor-pointer outline-none"
       )}
     >
-      <MotionText className={cn("whitespace-nowrap")}>{artist}</MotionText>
-      <p>{"-"}</p>
-      <MotionText className={cn("whitespace-nowrap")}>{title}</MotionText>
+      <AnimatePresence mode="popLayout" key={artistKey}>
+        <MotionText key={artistKey}>{artist}</MotionText>
+      </AnimatePresence>
+
+      {artist && title && <p>{"-"}</p>}
+      <AnimatePresence mode="popLayout" key={titleKey}>
+        <MotionText key={titleKey}>{title}</MotionText>
+      </AnimatePresence>
     </div>
   );
 }
@@ -34,53 +39,32 @@ const MotionText = ({
   children,
   className,
   transition = defaultExpansionTransition,
-
+  key,
   ...props
 }: {
   children: React.ReactNode;
   className?: string;
+  key?: string;
   transition?: MotionProps["transition"];
 } & MotionProps) => {
-  let [ref, { width }] = useMeasure();
-
   return (
-    <AnimatePresence mode="popLayout">
-      <motion.p
-        className={cn("whitespace-nowrap overflow-hidden truncate", className)}
-        ref={ref}
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-        }}
-        key={JSON.stringify(children, ignoreCircularReferences())}
-        exit={{
-          opacity: 0,
-        }}
-        transition={{
-          ...transition,
-          opacity: { duration: 0.3 },
-        }}
-        {...props}
-      >
-        {children}
-      </motion.p>
-    </AnimatePresence>
+    <motion.p
+      className={cn("whitespace-nowrap overflow-hidden truncate", className)}
+      key={key}
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+      }}
+      exit={{
+        opacity: 0,
+      }}
+      transition={{
+        ...transition,
+        opacity: { duration: 0.3 },
+      }}
+      {...props}
+    >
+      {children}
+    </motion.p>
   );
-};
-
-/*
-  Replacer function to JSON.stringify that ignores
-  circular references and internal React properties.
-  https://github.com/facebook/react/issues/8669#issuecomment-531515508
-*/
-const ignoreCircularReferences = () => {
-  const seen = new WeakSet();
-  return (key: any, value: any) => {
-    if (key.startsWith("_")) return; // Don't compare React's internal props.
-    if (typeof value === "object" && value !== null) {
-      if (seen.has(value)) return;
-      seen.add(value);
-    }
-    return value;
-  };
 };
