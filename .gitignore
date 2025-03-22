@@ -12,7 +12,9 @@ dist
 dist-ssr
 *.local
 .vscode
-public/*
+
+# Ignore used font files (users will need to download them)
+public/geistMono
 
 # Editor directories and files
 .vscode/*
