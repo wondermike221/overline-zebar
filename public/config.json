@@ -1,0 +1,5 @@
+{
+  "FLOW_LAUNCHER_PATH": "C:\\Users\\msy\\AppData\\Local\\FlowLauncher\\Flow.Launcher.exe",
+  "USE_AUTOTILING": true,
+  "AUTOTILING_WEBSOCKET_URI": "ws://localhost:6123"
+}
