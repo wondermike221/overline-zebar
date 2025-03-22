@@ -2,7 +2,6 @@ import React from "react";
 import { GlazeWmOutput } from "zebar";
 import { Chip } from "../../common/Chip";
 import { ConditionalPanel } from "../../common/ConditionalPanel";
-import { Transparency } from "./commands/Transparency";
 import { CopyProcessName } from "./commands/CopyProcessName";
 import { ToggleFloating } from "./commands/CycleFocus";
 
