@@ -119,7 +119,7 @@ Detailed steps:
 
 ### Configuration Options
 
-These configuration options allow you to customize key aspects of the widget's functionality without modifying the source code directly. You can edit these in the `config.json` file.
+These configuration options allow you to customize key aspects of the widget's functionality without modifying the source code directly. 
 
 - **`FLOW_LAUNCHER_PATH`**: Path to an `.exe` file executed when clicking the search icon
 
@@ -143,7 +143,7 @@ These configuration options allow you to customize key aspects of the widget's f
 
 ---
 
-## Customization
+## Customization (Option 2 ONLY)
 
 Customisation requires building the widget from source. If you're using the pre-built release, you can skip this section.
 
