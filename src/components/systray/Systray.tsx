@@ -1,0 +1,31 @@
+import { useState } from "react";
+import { SystrayOutput } from "zebar";
+import { SystrayItem } from "./components/SystrayItem";
+import { ExpandingCarousel } from "./components/ExpandingCarousel";
+import { ChevronRight } from "lucide-react";
+
+interface SystrayProps {
+  systray: SystrayOutput;
+}
+
+export default function Systray({ systray }: SystrayProps) {
+  const icons = systray.icons;
+  const [expanded, setExpanded] = useState(false);
+  const ICON_CUTOFF = 4;
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (e.shiftKey) {
+      e.preventDefault();
+      setExpanded(!expanded);
+    }
+  }
+
+  const items = icons.map((item) => <SystrayItem key={item.id} systray={systray} icon={item} />);
+
+  return (
+    <div className="flex items-center gap-1.5" onClick={handleClick}>
+      <ExpandingCarousel items={items} expanded={expanded} gap={6} itemWidth={16} visibleCount={ICON_CUTOFF} />
+    </div>
+  )
+}
+

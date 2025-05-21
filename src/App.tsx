@@ -12,6 +12,7 @@ import { WorkspaceControls } from "./components/WorkspaceControls";
 import "./styles/fonts.css";
 import { useAutoTiling } from "./utils/useAutoTiling";
 import { getWeatherIcon } from "./utils/weatherIcons";
+import Systray from "./components/systray";
 
 const providers = zebar.createProviderGroup({
   media: { type: "media" },
@@ -22,6 +23,7 @@ const providers = zebar.createProviderGroup({
   memory: { type: "memory" },
   weather: { type: "weather" },
   audio: { type: "audio" },
+  systray: { type: "systray" },
 });
 
 function App() {
@@ -62,14 +64,6 @@ function App() {
 
       <div className="flex gap-2 items-center h-full z-10">
         <div className="flex items-center h-full">
-          <VolumeControl
-            playbackDevice={output.audio?.defaultPlaybackDevice}
-            setVolume={output.audio?.setVolume}
-            statIconClassnames={statIconClassnames}
-          />
-        </div>
-
-        <div className="flex items-center h-full">
           {/* TODO: Extract to component */}
           <Chip
             className="flex items-center gap-3 h-full"
@@ -103,6 +97,21 @@ function App() {
               />
             )}
           </Chip>
+        </div>
+
+        <div className="flex items-center h-full">
+          <VolumeControl
+            playbackDevice={output.audio?.defaultPlaybackDevice}
+            setVolume={output.audio?.setVolume}
+            statIconClassnames={statIconClassnames}
+          />
+        </div>
+
+
+        <div className="h-full flex items-center px-0.5">
+          {output.systray &&
+            <Systray systray={output.systray} />
+          }
         </div>
 
         <div className="h-full flex items-center justify-center pr-2">

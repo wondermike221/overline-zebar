@@ -64,7 +64,7 @@ export default function Media({
       <ConditionalPanel sessionActive={!!currentSession}>
         <Chip
           className={cn(
-            "relative flex gap-2 select-none cursor-pointer overflow-clip group",
+            "relative flex gap-2 pl-2 select-none cursor-pointer overflow-clip group",
             "active:bg-background-deeper/90"
           )}
         >
