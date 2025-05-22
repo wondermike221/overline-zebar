@@ -30,14 +30,19 @@ export function SystrayItem({ icon, systray }: SystrayItemProps) {
   }
 
   return (
-    <img
-      src={icon.iconUrl}
+    <button
+      className="h-4 w-4 flex items-center justify-center"
       onMouseDown={(e) => handleClick(e)}
+      // Toggle firing right click event so it can use the trayicons one
       onContextMenu={(e) => { e.preventDefault() }}
       onMouseEnter={() => systray.onHoverEnter(icon.id)}
       onMouseMove={() => systray.onHoverMove(icon.id)}
       onMouseLeave={() => systray.onHoverLeave(icon.id)}
-      className="h-4 w-4"
-    />
+    >
+      <img
+        src={icon.iconUrl}
+        className="h-4 w-4"
+      />
+    </button>
   )
 }

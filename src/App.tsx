@@ -108,7 +108,7 @@ function App() {
         </div>
 
 
-        <div className="h-full flex items-center px-0.5">
+        <div className="h-full flex items-center px-0.5 pr-1">
           {output.systray &&
             <Systray systray={output.systray} />
           }
