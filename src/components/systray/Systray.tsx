@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { SystrayOutput } from "zebar";
-import { SystrayItem } from "./components/SystrayItem";
 import { ExpandingCarousel } from "./components/ExpandingCarousel";
-import { ChevronRight } from "lucide-react";
+import { SystrayItem } from "./components/SystrayItem";
 
 interface SystrayProps {
   systray: SystrayOutput;

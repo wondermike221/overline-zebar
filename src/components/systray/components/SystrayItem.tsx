@@ -1,5 +1,4 @@
 import { SystrayIcon, SystrayOutput } from "zebar";
-import { motion } from "framer-motion";
 
 const buttonType = {
   "LEFT": 0,
