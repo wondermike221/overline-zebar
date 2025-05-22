@@ -38,6 +38,7 @@ export function SystrayItem({ icon, systray }: SystrayItemProps) {
       onMouseEnter={() => systray.onHoverEnter(icon.id)}
       onMouseMove={() => systray.onHoverMove(icon.id)}
       onMouseLeave={() => systray.onHoverLeave(icon.id)}
+      title={icon.tooltip}
     >
       <img
         src={icon.iconUrl}
