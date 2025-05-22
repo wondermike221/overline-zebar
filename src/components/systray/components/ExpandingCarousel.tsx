@@ -81,9 +81,9 @@ export const ExpandingCarousel: React.FC<ExpandingCarouselProps> = ({
                   delay: index * 0.08,
                   layout: {
                     type: "spring",
-                    stiffness: 26.7,
-                    damping: 4.1,
-                    mass: 0.2,
+                    stiffness: 320,
+                    damping: 20,
+                    mass: 0.4,
                   }
                 }}
               >
