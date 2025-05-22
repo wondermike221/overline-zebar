@@ -1,5 +1,5 @@
 import React from "react";
-import { MediaControlOptions, MediaSession } from "zebar";
+import { MediaOutput } from "zebar";
 import { cn } from "../../utils/cn";
 import { Chip } from "../common/Chip";
 import { ConditionalPanel } from "../common/ConditionalPanel";
@@ -7,38 +7,40 @@ import { ProgressBar } from "./components/ProgressBar";
 import { Status } from "./components/Status";
 import { TitleDetails } from "./components/TitleDetails";
 
-interface MediaProps {
-  allSessions: MediaSession[] | undefined;
-  togglePlayPause: ((options?: MediaControlOptions) => void) | undefined;
-  next: ((options?: MediaControlOptions) => void) | undefined;
-  previous: ((options?: MediaControlOptions) => void) | undefined;
-}
+type MediaProps = MediaOutput;
 
 export const TitleDetailsMemo = React.memo(TitleDetails);
 
+// To allow cycling of Media sessions with Alt+Click we have to handle our own current session
+// This is why there are two current sessions defined here:
+// zebarCurrentSession: The actual session given from the Media provider.
+// currentSession: Our own local state of Zebar session.
+// This is not ideal and hopefully future Zebar releases will provide a way to change sessions internally.
 export default function Media({
   allSessions,
   togglePlayPause,
   next,
   previous,
+  currentSession: zebarCurrentSession,
 }: MediaProps) {
-  const [currentSessionIdx, setCurrentSessionIdx] = React.useState<number>(0);
-  const currentSession = allSessions?.[currentSessionIdx];
+  const zebarCurrentSessionIdx = allSessions.findIndex((s) => s.sessionId === zebarCurrentSession?.sessionId);
+  const [currentSessionIdx, setCurrentSessionIdx] = React.useState<number>(zebarCurrentSessionIdx === -1 ? 0 : zebarCurrentSessionIdx);
+  const currentSession = allSessions[currentSessionIdx];
 
   const handlePlayPause = (e: React.MouseEvent, currentSessionIdx: number) => {
-    const currentSession = allSessions?.[currentSessionIdx];
+    const currentSession = allSessions[currentSessionIdx];
 
     if (e.shiftKey) {
-      previous?.({ sessionId: currentSession?.sessionId });
+      previous({ sessionId: currentSession?.sessionId });
       return;
     }
 
     if (e.ctrlKey) {
-      next?.({ sessionId: currentSession?.sessionId });
+      next({ sessionId: currentSession?.sessionId });
       return;
     }
 
-    if (e.altKey && allSessions) {
+    if (e.altKey) {
       if (currentSessionIdx < allSessions.length - 1) {
         setCurrentSessionIdx((prev) => prev + 1);
       } else {
@@ -48,7 +50,7 @@ export default function Media({
     }
 
     if (currentSession) {
-      togglePlayPause?.({ sessionId: currentSession.sessionId });
+      togglePlayPause({ sessionId: currentSession.sessionId });
     }
   };
 
@@ -64,7 +66,7 @@ export default function Media({
       <ConditionalPanel sessionActive={!!currentSession}>
         <Chip
           className={cn(
-            "relative flex gap-2 pl-2 select-none cursor-pointer overflow-clip group",
+            "relative flex gap-2 select-none cursor-pointer overflow-clip group",
             "active:bg-background-deeper/90"
           )}
         >

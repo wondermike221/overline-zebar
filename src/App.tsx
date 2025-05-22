@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as zebar from "zebar";
 import { Center } from "./components/Center";
 import { Chip } from "./components/common/Chip";
-import CurrentTrack from "./components/media";
+import Media from "./components/media";
 import Stat from "./components/stat";
 import { weatherThresholds } from "./components/stat/defaults/thresholds";
 import { TilingControl } from "./components/TilingControl";
@@ -47,12 +47,7 @@ function App() {
           <WorkspaceControls glazewm={output.glazewm} />
         </div>
         <div className="flex items-center justify-center gap-2 h-full">
-          <CurrentTrack
-            togglePlayPause={output.media?.togglePlayPause}
-            next={output.media?.next}
-            previous={output.media?.previous}
-            allSessions={output?.media?.allSessions}
-          />
+          {output.media && <Media {...output.media} />}
         </div>
       </div>
 
