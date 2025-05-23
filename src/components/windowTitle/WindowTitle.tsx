@@ -4,14 +4,14 @@ import { forwardRef, useState } from "react";
 import { GlazeWmOutput } from "zebar";
 import { WindowControls } from "./components/WindowControls";
 
-interface WindowTitleProps {
+type WindowTitleProps = {
   glazewm: GlazeWmOutput | null;
 }
 
 export const WindowTitle = forwardRef<HTMLButtonElement, WindowTitleProps>(
   ({ glazewm }, ref) => {
+    if (!glazewm) return;
     const [show, setShow] = useState(false);
-    if (!glazewm) return null;
 
     const title = getWindowTitle(glazewm);
     const ANIMATION_EXIT_OFFSET = 3;

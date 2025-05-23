@@ -2,7 +2,7 @@
 
 A fully-featured custom widget for [zebar](https://github.com/glzr-io/zebar).
 
-![Screenshot of overline-zebar in use with GlazeWM, with Zen Browser underneath](https://github.com/user-attachments/assets/333feb9c-225d-4be9-84db-cbdc7010e698)
+![Screenshot of overline-zebar in use with GlazeWM, Zen Browser underneath](https://github.com/user-attachments/assets/333feb9c-225d-4be9-84db-cbdc7010e698)
 
 ## Features
 
@@ -13,6 +13,8 @@ A fully-featured custom widget for [zebar](https://github.com/glzr-io/zebar).
 - **Workspace Display**
   - Click to **focus on a workspace**.
   - Scroll to **switch between workspaces**.
+- **System Tray**
+  - Interact with left + right click
 - **Search & Tiling Direction Controls**
 - **Volume Control**
   - Click to **open volume slider**.
@@ -26,57 +28,13 @@ A fully-featured custom widget for [zebar](https://github.com/glzr-io/zebar).
 
 ## Installation
 
-### Option 1: Download the Pre-built Release
+**For releases older than Zebar v3, please refer to [this branch](#).**
 
-This is the easiest and fastest way to get overline-zebar up and running. Choose this option if you want to use the widget with its default configuration.
-
-_This uses Flow Launcher as the default launcher application. See the [Configuration](#configuration) section below to learn how to change the launcher application._
-
-1. Go to the [Releases page](https://github.com/mushfikurr/overline-zebar/releases) on GitHub
-2. Download the latest `overline-zebar.zip` file
-3. Extract the zip file to your Zebar widget directory:
-   ```
-   C:\Users\<username>\.glzr\zebar\
-   ```
-   This should create a folder named `overline-zebar` in your Zebar widget directory.
-4. Enable the widget by expanding the "Widget configs" option, selecting "overline-zebar > default", and clicking "Enable". You can also enable the widget to startup the same way.
-5. Position the widget dimensions and position by right clicking the Zebar system tray icon and selecting "Open Settings".
-6. Save your configuration by clicking "Save" in the Zebar settings window
-
-## Configuration
-
-You can customize various aspects of overline-zebar by editing the `config.json` file. This file allows you to change settings without modifying the source code.
-
-### Configuration File Location
-
-- **For pre-built version users**: Navigate to:
-
-  ```
-  C:\Users\<username>\.glzr\zebar\overline-zebar\dist\public\
-  ```
-
-- **For developers building from source**: Navigate to:
-  ```
-  public/
-  ```
-
-### Creating or Editing the Configuration File
-
-1. The pre-built version includes a `config.json` file, while the source code includes a `release-config.json` file which serves as a template for the built version. If you're building from source, modify `config.json` in the `public/` directory.
-
-2. Add your desired configuration options to the file. Here's an example with all available options:
-
-   ```json
-   {
-     "FLOW_LAUNCHER_PATH": "C:\\Program Files\\YourLauncher\\YourLauncher.exe",
-     "USE_AUTOTILING": true,
-     "AUTOTILING_WEBSOCKET_URI": "ws://localhost:6123"
-   }
-   ```
-
-   Make sure to use double backslashes (`\\`) in any file paths.
-
-3. Save the file and restart Zebar for the changes to take effect
+### Option 1: The Zebar Marketplace
+  1. Right-click the Zebar tray icon, and click Browse Widgets.
+  2. Search for "overline-zebar"
+  3. Click "Install"
+  4. Continue to [configuration](#Configuration) section
 
 ### Option 2: Build from Source
 
@@ -94,7 +52,7 @@ Prerequisites:
 
 Detailed steps:
 
-1. Clone the repository to your local machine:
+1. Clone the repository to your local machine, in the .glzr directory (C:/Users/<USER>/.glzr/zebar for Windows):
 
    ```sh
    git clone https://github.com/mushfikurr/overline-zebar.git
@@ -117,51 +75,62 @@ Detailed steps:
    ```
    This creates a `dist` folder containing the compiled widget ready for use.
 
-### Configuration Options
-
-These configuration options allow you to customize key aspects of the widget's functionality without modifying the source code directly. You can edit these in the `config.json` file.
-
-- **`FLOW_LAUNCHER_PATH`**: Path to an `.exe` file executed when clicking the search icon
-
-  - Default: `C:\Users\username\AppData\Local\FlowLauncher\Flow.Launcher.exe`
-  - Example custom value: `C:\Program Files\Launchers\MyCustomLauncher.exe`
-  - Set this if you use a different launcher application or if Flow Launcher is installed in a non-standard location
-
-- **`USE_AUTOTILING`**: Controls the auto-tiling functionality
-
-  - Default: `false`
-  - Set to `true` to enable automatic tiling direction switching
-  - When enabled, new windows will automatically switch tiling directions based on the size of the focused window
-  - This creates a more efficient use of screen space for different window sizes
-
-- **`AUTOTILING_WEBSOCKET_URI`**: WebSocket URI for auto-tiling functionality
-  - Default: `ws://localhost:6123`
-  - Change this if you're running the WebSocket server on a different port or machine
-  - Only relevant if `USE_AUTOTILING` is set to `true`
-
-**Note:** All configuration options have sensible defaults. You only need to modify the `config.json` file if you want to override these defaults.
-
 ---
+## Configuration
 
-## Customization
+You can customize various aspects of overline-zebar by editing the `config.json` file. This file allows you to change settings without modifying the source code.
 
-Customisation requires building the widget from source. If you're using the pre-built release, you can skip this section.
+### General Configuration
 
-### Fonts
+For general Zebar widget configuration:
+- Right click Zebar tray icon
+- Find Widget Packs > overline-zebar > Pack Settings
+RRECOMMENDED**: Adapt the width of the Zebar to your gap & screen resolution. 
+
+### overline-zebar Configuration
+
+- **For pre-built version users**: Navigate to:
+
+```
+C:\Users\<username>\.glzr\zebar\overline-zebar\dist\public\
+```
+
+- **For developers building from source**: Navigate to:
+```
+  public/
+```
+
+#### Configuration Values
+
+```json
+"FLOW_LAUNCHER_PATH": "C:\\Users\\msy\\AppData\\Local\\FlowLauncher\\Flow.Launcher.exe",
+"USE_AUTOTILING": true,
+"AUTOTILING_WEBSOCKET_URI": "ws://localhost:6123",
+"MEDIA_MAX_WIDTH": "300"
+```
+
+`FLOW_LAUNCHER_PATH` - `string`: .exe path for the "search button" to open. This can be for any launcher (i.e. Powertoys Run)
+`USE_AUTOTILING` - `boolean`: Defaults to `true`. This changes the tiling direction every time a window reaches half of it's size.
+`AUTOTILING_WEBSOCKET_URI` - `string`: Defaults to `ws://localhost:6123`. This is where Zebar listens for events from GlazeWM.
+`MEDIA_MAX_WIDTH` - `string`: Defaults to `400`. This is the maximum width of the Media widget (the currently playing widget) measured in pixels. Recommended to be >100.
+
+### Fonts (Development Only)
 
 Fonts are defined in [`src/styles/fonts.css`](src/styles/fonts.css).
 
 - Use system fonts directly.
 - Or, download fonts to the `public/` folder and reference them in `fonts.css`.
+- By default it targets monospaced fonts. This can be changed in `App.tsx`.
 - [Font reference](https://developer.mozilla.org/en-US/docs/Web/CSS/font).
 
-### Colors
 
-- Edit [`tailwind.config.js`](tailwind.config.js) to customize colors.
+### Colors (Development Only)
+
+- Edit [`tailwind.config.js`](tailwind.config.js) and [`src/styles/theme.css`] to customize colors.
 
 ---
 
-## Development & Hot Reload
+## See Live Changes to Zebar (Development Only)
 
 Follow the steps to build the project from source.
 
@@ -177,3 +146,4 @@ Follow the steps to build the project from source.
 ### Contributions
 
 Pull requests are welcome! If you find any issues or have feature suggestions, feel free to open an issue on GitHub.
+

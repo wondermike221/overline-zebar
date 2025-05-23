@@ -38,7 +38,7 @@ function App() {
   const statIconClassnames = "h-3 w-3 text-icon";
 
   return (
-    <div className="relative flex justify-between items-center bg-background/80 backdrop-blur-3xl text-text h-full antialiased select-none border rounded-lg border-border font-mono py-1.5">
+    <div className="relative flex justify-between items-center bg-background/80 border border-button-border/80 backdrop-blur-3xl text-text h-full antialiased select-none rounded-lg font-mono py-1.5">
       <div className="flex items-center gap-2 h-full z-10 pl-1.5">
         <div className="flex items-center gap-1.5 h-full">
           <TilingControl glazewm={output.glazewm} />
@@ -47,7 +47,7 @@ function App() {
           <WorkspaceControls glazewm={output.glazewm} />
         </div>
         <div className="flex items-center justify-center gap-2 h-full">
-          {output.media && <Media {...output.media} />}
+          <Media media={output.media} />
         </div>
       </div>
 
@@ -104,9 +104,7 @@ function App() {
 
 
         <div className="h-full flex items-center px-0.5 pr-1">
-          {output.systray &&
-            <Systray systray={output.systray} />
-          }
+          <Systray systray={output.systray} />
         </div>
 
         <div className="h-full flex items-center justify-center pr-2">

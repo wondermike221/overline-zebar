@@ -2,6 +2,7 @@ import { AnimatePresence, MotionProps, motion } from "framer-motion";
 import React from "react";
 import { cn } from "../../../utils/cn";
 import useMeasure from "react-use-measure";
+import { useConfig } from "../../../context/ConfigContext";
 
 export function TitleDetails({
   title,
@@ -18,6 +19,7 @@ export function TitleDetails({
   // i.e. REALLY_LONG_ARTIS... - title
   // artist - REALLY_LONG_TI...
   const [truncateArtist, setTruncateArtist] = React.useState<boolean | null>(null);
+  const config = useConfig();
 
   React.useEffect(() => {
     if (artistWidth === 0 || titleWidth === 0) return;
@@ -28,8 +30,9 @@ export function TitleDetails({
 
   return (
     <div
+      style={config.mediaMaxWidth ? { maxWidth: `${config.mediaMaxWidth}px` } : undefined}
       className={cn(
-        "inline-flex max-w-[400px] items-center gap-1.5 cursor-pointer outline-none"
+        "inline-flex items-center gap-1.5 cursor-pointer outline-none"
       )}
     >
       <AnimatePresence mode="popLayout">

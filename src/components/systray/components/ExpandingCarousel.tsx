@@ -1,5 +1,5 @@
 import { animate, AnimatePresence, motion, useMotionTemplate, useMotionValue, useTransform } from 'framer-motion';
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
 interface ExpandingCarouselProps {
   items: ReactElement[];

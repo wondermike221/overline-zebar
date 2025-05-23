@@ -1,17 +1,16 @@
 import { motion } from "framer-motion";
 import { Workspace } from "glazewm";
+import useMeasure from "react-use-measure";
 import { GlazeWmOutput } from "zebar";
 import { cn } from "../utils/cn";
 import { buttonStyles } from "./common/Button";
 import { Chip } from "./common/Chip";
-import useMeasure from "react-use-measure";
 
-interface WorkspaceControlsProps {
+type WorkspaceControlsProps = {
   glazewm: GlazeWmOutput | null;
 }
-
 export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
-  if (!glazewm) return null;
+  if (!glazewm) return;
   const workspaces = glazewm.currentWorkspaces;
 
   const [ref, { width }] = useMeasure();
@@ -54,7 +53,7 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
         ref={ref}
         onWheel={handleWheel}
       >
-        {workspaces.map((workspace: Workspace, idx) => {
+        {workspaces.map((workspace: Workspace) => {
           const isFocused = workspace.hasFocus;
           return (
             <button
@@ -66,7 +65,7 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
                 "relative rounded-xl px-2 transition duration-500 ease-in-out text-text-muted h-full",
                 isFocused ? "" : "hover:text-text",
                 isFocused &&
-                  "text-text duration-700 transition-all ease-in-out font-medium"
+                "text-text duration-700 transition-all ease-in-out font-medium"
               )}
               style={{
                 WebkitTapHighlightColor: "transparent",

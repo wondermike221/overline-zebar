@@ -3,11 +3,12 @@ import { SystrayOutput } from "zebar";
 import { ExpandingCarousel } from "./components/ExpandingCarousel";
 import { SystrayItem } from "./components/SystrayItem";
 
-interface SystrayProps {
-  systray: SystrayOutput;
+type SystrayProps = {
+  systray: SystrayOutput | null;
 }
 
 export default function Systray({ systray }: SystrayProps) {
+  if (!systray) return;
   const icons = systray.icons;
   const [expanded, setExpanded] = useState(false);
   const ICON_CUTOFF = 4;

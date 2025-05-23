@@ -92,6 +92,14 @@ export const getFlowLauncherPath = async (): Promise<string> => {
   );
 };
 
+export const getMediaMaxWidth = async (): Promise<string> => {
+  return await getStringFromConfig(
+    "MEDIA_MAX_WIDTH",
+    "400"
+  );
+};
+
+
 export const getUseAutoTiling = async (): Promise<boolean> => {
   return await getBooleanFromConfig("USE_AUTOTILING", false);
 };
