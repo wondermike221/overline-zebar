@@ -25,8 +25,6 @@ export const ExpandingCarousel: React.FC<ExpandingCarouselProps> = ({
   gap = 8,
   fadeEdgeOffset = 10
 }) => {
-  const [hovered, setHovered] = useState(false);
-
   const totalItems = items.length;
   const fullWidth = totalItems * itemWidth + (totalItems - 1) * gap;
   const visibleWidth = visibleCount * itemWidth + (visibleCount - 1) * gap;
@@ -39,11 +37,11 @@ export const ExpandingCarousel: React.FC<ExpandingCarouselProps> = ({
   const edgeColor = useTransform(edgeOpacity, (val) => `rgba(0,0,0,${val})`);
   const gradient = useMotionTemplate`linear-gradient(to right, ${edgeColor} 0%, black ${leftEdge}, black ${rightEdge}, ${edgeColor} 100%)`;
   useEffect(() => {
-    animate(edgeOpacity, (expanded || hovered) ? 1 : 0.3, { duration: 1.4 });
-  }, [expanded, hovered])
+    animate(edgeOpacity, (expanded) ? 1 : 0.3, { duration: 1.4 });
+  }, [expanded])
 
   return (
-    <div className="w-full flex justify-center" onMouseEnter={() => { setHovered(true) }} onMouseLeave={() => setHovered(false)}>
+    <div className="w-full flex justify-center">
       <motion.div
         className="relative overflow-hidden"
         initial={false}
