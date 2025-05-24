@@ -28,7 +28,13 @@ A fully-featured custom widget for [zebar](https://github.com/glzr-io/zebar).
 
 ## Installation
 
-**For releases older than Zebar v3, please refer to [this branch](#).**
+**For releases older than Zebar v3, please refer to [this branch](https://github.com/mushfikurr/overline-zebar/tree/old/zebar-v2).**
+
+Please note if you have local branches that are from the older branch, the layout has changed:
+```
+main -> old/zebar-v2
+migrate/zebar-v3 -> main
+```
 
 ### Option 1: The Zebar Marketplace
   1. Right-click the Zebar tray icon, and click Browse Widgets.
@@ -54,25 +60,25 @@ Detailed steps:
 
 1. Clone the repository to your local machine, in the .glzr directory (C:/Users/<USER>/.glzr/zebar for Windows):
 
-   ```sh
+```sh
    git clone https://github.com/mushfikurr/overline-zebar.git
    cd overline-zebar
-   ```
+```
 
 2. Install all required dependencies:
 
-   ```sh
+```sh
    npm install
-   ```
+```
 
    This will install React, Vite, TailwindCSS, and all other dependencies needed for development.
 
 3. See the [Configuration](#configuration) section below for details on how to customize the widget by editing the `public/config.json` file.
 
 4. Build the project for production:
-   ```sh
+```sh
    npm run build
-   ```
+```
    This creates a `dist` folder containing the compiled widget ready for use.
 
 ---
