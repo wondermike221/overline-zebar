@@ -91,7 +91,8 @@ You can customize various aspects of overline-zebar by editing the `config.json`
 For general Zebar widget configuration:
 - Right click Zebar tray icon
 - Find Widget Packs > overline-zebar > Pack Settings
-RRECOMMENDED**: Adapt the width of the Zebar to your gap & screen resolution. 
+
+**RECOMMENDED**: Adapt the width of the Zebar to your gap & screen resolution. 
 
 ### overline-zebar Configuration
 
