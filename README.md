@@ -91,7 +91,8 @@ You can customize various aspects of overline-zebar by editing the `config.json`
 For general Zebar widget configuration:
 - Right click Zebar tray icon
 - Find Widget Packs > overline-zebar > Pack Settings
-RRECOMMENDED**: Adapt the width of the Zebar to your gap & screen resolution. 
+
+**RECOMMENDED**: Adapt the width of the Zebar to your gap & screen resolution. 
 
 ### overline-zebar Configuration
 
@@ -115,9 +116,12 @@ C:\Users\<username>\.glzr\zebar\overline-zebar\dist\public\
 "MEDIA_MAX_WIDTH": "300"
 ```
 
-`FLOW_LAUNCHER_PATH` - `string`: .exe path for the "search button" to open. This can be for any launcher (i.e. Powertoys Run)
+`FLOW_LAUNCHER_PATH` - `string`: .exe path for the "search button" to open. This can be for any launcher (i.e. Powertoys Run).
+
 `USE_AUTOTILING` - `boolean`: Defaults to `true`. This changes the tiling direction every time a window reaches half of it's size.
+
 `AUTOTILING_WEBSOCKET_URI` - `string`: Defaults to `ws://localhost:6123`. This is where Zebar listens for events from GlazeWM.
+
 `MEDIA_MAX_WIDTH` - `string`: Defaults to `400`. This is the maximum width of the Media widget (the currently playing widget) measured in pixels. Recommended to be >100.
 
 ### Fonts (Development Only)
