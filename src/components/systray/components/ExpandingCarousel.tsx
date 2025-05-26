@@ -71,8 +71,7 @@ export const ExpandingCarousel: React.FC<ExpandingCarouselProps> = ({
                 className="flex-shrink-0"
                 style={{ width: itemWidth }}
                 initial={{ opacity: 0, scale: 0.85 }}
-                animate={{ opacity: 0.9, scale: 1 }}
-                whileHover={{ opacity: 1 }}
+                animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0 }}
                 transition={{
                   ...springConfig,
