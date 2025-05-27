@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const ReactCompilerConfig = {
-  target: '19',
+  target: '18',
 };
 
 export default defineConfig({
