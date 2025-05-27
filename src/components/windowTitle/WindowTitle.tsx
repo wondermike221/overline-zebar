@@ -43,7 +43,7 @@ export const WindowTitle = forwardRef<HTMLButtonElement, WindowTitleProps>(
           transition={{ duration: 0.15, ease: "easeInOut" }}
           className="font-medium relative h-full flex items-center cu"
           title={title ?? "Focused Window"}
-          onClick={(e) => handleWindowTitle(e, getWindowProcess(glazewm) ?? "")}
+          onClick={(e: React.MouseEvent) => handleWindowTitle(e, getWindowProcess(glazewm) ?? "")}
         >
           {title ?? <AppWindowIcon className="h-4 w-4 text-icon" />}
           <WindowControls
