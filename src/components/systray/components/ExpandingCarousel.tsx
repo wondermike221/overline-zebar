@@ -1,6 +1,5 @@
 import { animate, AnimatePresence, motion, useMotionTemplate, useMotionValue, useTransform } from 'framer-motion';
 import React, { ReactElement, useEffect } from 'react';
-
 interface ExpandingCarouselProps {
   items: ReactElement[];
   expanded: boolean;
@@ -41,9 +40,9 @@ export const ExpandingCarousel: React.FC<ExpandingCarouselProps> = ({
   }, [expanded])
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex items-center justify-center">
       <motion.div
-        className="relative overflow-hidden"
+        className="relative overflow-hidden flex items-center"
         initial={false}
         animate={{ width: expanded ? fullWidth : visibleWidth }}
         style={{
@@ -53,7 +52,8 @@ export const ExpandingCarousel: React.FC<ExpandingCarouselProps> = ({
           WebkitMaskRepeat: 'no-repeat',
           maskSize: '100% 100%',
           maskRepeat: 'no-repeat',
-        }} transition={springConfig}
+        }}
+        transition={springConfig}
       >
         <motion.div
           className="flex"
@@ -68,7 +68,7 @@ export const ExpandingCarousel: React.FC<ExpandingCarouselProps> = ({
               <motion.div
                 key={item.key}
                 layout
-                className="flex-shrink-0"
+                className="flex items-center flex-shrink-0"
                 style={{ width: itemWidth }}
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
