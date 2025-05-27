@@ -4,10 +4,19 @@ import { execSync } from "child_process";
 import dotenv from "dotenv";
 
 dotenv.config();
+const ReactCompilerConfig = {
+  target: '19',
+};
 
 export default defineConfig({
   plugins: [
-    react(),
+    react({
+      babel: {
+        plugins: [
+          ["babel-plugin-react-compiler", ReactCompilerConfig],
+        ],
+      },
+    }),
     {
       name: "postbuild",
       closeBundle() {
@@ -29,6 +38,7 @@ export default defineConfig({
         execSync(`start ${exePath}`, { stdio: "inherit" });
       },
     },
+
   ],
   base: "./",
 });
