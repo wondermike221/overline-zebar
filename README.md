@@ -2,7 +2,7 @@
 
 A fully featured custom widget for [Zebar](https://github.com/glzr-io/zebar).
 
-![Screenshot of overline-zebar in use with GlazeWM, Zen Browser underneath](https://github.com/user-attachments/assets/333feb9c-225d-4be9-84db-cbdc7010e698)
+![Screenshot of overline-zebar above, and a neovim window below.](https://github.com/user-attachments/assets/d96df10c-83d0-463a-993f-f0d89c305a3b)
 
 ## Features
 
