@@ -40,9 +40,9 @@ export const ExpandingCarousel: React.FC<ExpandingCarouselProps> = ({
   }, [expanded])
 
   return (
-    <div className="w-full flex items-center justify-center">
+    <div className="w-full flex justify-center items-center">
       <motion.div
-        className="relative overflow-hidden flex items-center"
+        className="relative overflow-hidden"
         initial={false}
         animate={{ width: expanded ? fullWidth : visibleWidth }}
         style={{

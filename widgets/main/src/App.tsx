@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as zebar from "zebar";
 import { Center } from "./components/Center";
 import { Chip } from "./components/common/Chip";
@@ -13,6 +13,8 @@ import "./styles/fonts.css";
 import { useAutoTiling } from "./utils/useAutoTiling";
 import { getWeatherIcon } from "./utils/weatherIcons";
 import Systray from "./components/systray";
+import { useQuery } from "@tanstack/react-query";
+import { calculateWidgetPlacementFromRight } from "./utils/calculateWidgetPlacement";
 
 const providers = zebar.createProviderGroup({
   media: { type: "media" },
@@ -36,6 +38,7 @@ function App() {
   useAutoTiling();
 
   const statIconClassnames = "h-3 w-3 text-icon";
+  const chipRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <div className="relative flex justify-between items-center bg-background/80 border border-button-border/80 backdrop-blur-3xl text-text h-full antialiased select-none rounded-lg font-mono py-1.5 mx-1">
@@ -61,10 +64,12 @@ function App() {
         <div className="flex items-center h-full">
           {/* TODO: Extract to component */}
           <Chip
+            ref={chipRef}
             className="flex items-center gap-3 h-full"
             as="button"
-            onClick={() => {
-              output.glazewm?.runCommand("shell-exec taskmgr");
+            onClick={async () => {
+              const widgetPlacement = await calculateWidgetPlacementFromRight(chipRef, { width: 400, height: 200 })
+              zebar.startWidget("system-stats", widgetPlacement, {});
             }}
           >
             {output.cpu && (

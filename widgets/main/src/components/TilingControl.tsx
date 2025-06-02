@@ -1,6 +1,6 @@
 import { ChevronRight, Search } from "lucide-react";
 import { cn } from "../utils/cn";
-import { Button } from "./common/Button";
+import { Button } from "@overline-zebar/ui";
 import { GlazeWmOutput } from "zebar";
 import { motion, AnimatePresence } from "framer-motion";
 import { useConfig } from "../context/ConfigContext";
@@ -11,7 +11,7 @@ interface TilingControlProps {
 
 export function TilingControl({ glazewm }: TilingControlProps) {
   const { flowLauncherPath, isLoading } = useConfig();
-  
+
   if (!glazewm) return null;
 
   return (
