@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Route, Router, Switch } from "wouter";
 import { useHashLocation } from "wouter/use-hash-location";
 import * as zebar from "zebar";
-import Navbar from "./components/navbar/navbar";
-import HostPanel from "./components/host-panel/HostPanel";
+import Navbar from "./components/navbar";
+import Host from "./components/host";
 
 const providers = zebar.createProviderGroup({
   cpu: { type: "cpu" },
@@ -31,7 +31,7 @@ function App() {
           </div>
 
           <Switch>
-            <Route path="/" component={() => <HostPanel />} />
+            <Route path="/" component={() => <Host />} />
           </Switch>
         </div>
       </div>
