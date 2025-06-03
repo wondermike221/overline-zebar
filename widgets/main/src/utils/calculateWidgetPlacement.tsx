@@ -17,7 +17,7 @@ export const calculateWidgetPlacementFromRight = async (
 
   return {
     anchor: "top_right",
-    offsetX: `-${gap - 3}px`,
+    offsetX: `-${gap - 0}px`,
     offsetY: `${windowSize.height + 6}px`,
     width: `${size.width}px`,
     height: `${size.height}px`,

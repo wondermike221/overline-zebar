@@ -66,6 +66,7 @@ export default function VolumeControl({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  if (!playbackDevice?.volume) return;
 
   return (
     <Chip
