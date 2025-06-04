@@ -1,7 +1,6 @@
 import { BatteryOutput, HostOutput } from "zebar";
 import { BatterySection } from "./components/BatterySection";
-import { formatMsToHumanDuration } from "../../utils/time";
-import { Button } from "@overline-zebar/ui";
+import { formatMsToHumanDuration } from "@/utils/time";
 
 export default function Host({ host, battery }: { host: HostOutput | null, battery: BatteryOutput | null }) {
 	if (!host) return null;

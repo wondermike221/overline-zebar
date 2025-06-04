@@ -1,7 +1,7 @@
 import { Battery, Cable, Heart, PlugZap, RefreshCcw, Zap } from "lucide-react";
 import { BatteryOutput } from "zebar";
-import { formatMsToHumanDuration } from "../../../utils/time";
-import { cn } from "../../../utils/cn";
+import { formatMsToHumanDuration } from "@/utils/time";
+import { cn } from "@/utils/cn";
 
 type BatteryProps = {
 	battery: BatteryOutput

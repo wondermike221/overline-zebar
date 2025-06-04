@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { execSync } from "child_process";
 import dotenv from "dotenv";
+import path from "path";
 
 dotenv.config();
 const ReactCompilerConfig = {
@@ -9,6 +10,11 @@ const ReactCompilerConfig = {
 };
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src")
+    }
+  },
   plugins: [
     react({
       babel: {
