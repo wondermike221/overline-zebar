@@ -12,7 +12,7 @@ function withOpacity(variableName) {
 // When extending colours, withOpacity() allows support for transparency.
 // Actual colours are defined in /src/styles/themes.css
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "../../ui/src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {

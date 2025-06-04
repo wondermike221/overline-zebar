@@ -1,12 +1,11 @@
-import { LucideIcon } from "lucide-react";
-import { cn } from "../../../utils/cn";
 import {
-  motion,
   AnimatePresence,
   HTMLMotionProps,
-  animate,
+  motion
 } from "framer-motion";
+import { LucideIcon } from "lucide-react";
 import React from "react";
+import { cn } from "../../../utils/cn";
 
 interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

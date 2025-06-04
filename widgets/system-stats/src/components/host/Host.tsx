@@ -1,6 +1,7 @@
 import { BatteryOutput, HostOutput } from "zebar";
 import { BatterySection } from "./components/BatterySection";
 import { formatMsToHumanDuration } from "../../utils/time";
+import { Button } from "@overline-zebar/ui";
 
 export default function Host({ host, battery }: { host: HostOutput | null, battery: BatteryOutput | null }) {
 	if (!host) return null;
@@ -11,14 +12,19 @@ export default function Host({ host, battery }: { host: HostOutput | null, batte
 	return (
 		<div className="px-3 py-2 flex flex-col justify-between select-text w-full text-text-muted">
 			<div className="space-y-1.5">
-				<div className="text-text border-text-muted/40 w-full">
-					<div className="flex gap-1.5 w-full">
-						<p>{host.osName}</p>
-						<p>{"-"}</p>
-						<p>{host.friendlyOsVersion}</p>
+
+				<div className="flex items-start">
+					<div className="text-text border-text-muted/40 w-full">
+						<div className="w-full overflow-hidden">
+							<p className="font-medium truncate whitespace-nowrap overflow-hidden">
+								{host.osName} - {host.friendlyOsVersion}
+							</p>
+						</div>
+						<p>{host.hostname}</p>
 					</div>
-					<p>{host.hostname}</p>
 				</div>
+
+
 				<div>
 					<p>Booted at {bootedAt.toLocaleTimeString()}</p>
 					<p>Up for {uptimeDisplay}</p>

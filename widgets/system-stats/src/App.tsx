@@ -19,9 +19,9 @@ function App() {
   useEffect(() => {
     providers.onOutput(() => setOutput(providers.outputMap));
 
-    // zebar.currentWidget().tauriWindow.listen("tauri://blur", () => {
-    //   zebar.currentWidget().close();
-    // });
+    zebar.currentWidget().tauriWindow.listen("tauri://blur", () => {
+      zebar.currentWidget().close();
+    });
   }, []);
 
   const sampleBattery = {

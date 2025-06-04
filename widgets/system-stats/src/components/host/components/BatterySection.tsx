@@ -27,7 +27,7 @@ export function BatterySection({ battery }: BatteryProps) {
 				<div className="flex justify-between items-center">
 					<div className="flex items-center gap-1">
 						{battery.isCharging ? <Zap className="h-3 w-3 text-icon animate-pulse" strokeWidth={2.6} /> : <Battery className="h-4 w-4 text-icon" />}
-						<p>{battery.chargePercent}%</p>
+						<p className="text-text">{battery.chargePercent}%</p>
 					</div>
 					{formatTimeTillFullOrEmpty && <p>{`~ ${formatTimeTillFullOrEmpty}`}</p>}
 				</div>

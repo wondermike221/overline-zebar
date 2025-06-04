@@ -19,12 +19,12 @@
     "dotenv": "^16.4.7",
     "framer-motion": "^11.11.17",
     "lucide-react": "^0.460.0",
-    "react": "^18.3.1",
-    "react-compiler-runtime": "^19.1.0-rc.2",
-    "react-dom": "^18.3.1",
+    "react": "catalog:",
+    "react-compiler-runtime": "catalog:",
+    "react-dom": "catalog:",
     "react-use-measure": "^2.1.1",
     "tailwind-merge": "^2.5.4",
-    "zebar": "^3.1.0"
+    "zebar": "catalog:"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

@@ -1,9 +1,8 @@
+import { buttonStyles } from "@overline-zebar/ui";
 import { motion } from "framer-motion";
-import { Workspace } from "glazewm";
 import useMeasure from "react-use-measure";
 import { GlazeWmOutput } from "zebar";
 import { cn } from "../utils/cn";
-import { buttonStyles } from "./common/Button";
 import { Chip } from "./common/Chip";
 
 type WorkspaceControlsProps = {
@@ -53,7 +52,7 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
         ref={ref}
         onWheel={handleWheel}
       >
-        {workspaces.map((workspace: Workspace) => {
+        {workspaces.map((workspace) => {
           const isFocused = workspace.hasFocus;
           return (
             <button
