@@ -12,6 +12,9 @@ catalogs:
     '@types/react-dom':
       specifier: ^18.3.5
       version: 18.3.7
+    postcss:
+      specifier: ^8.4.49
+      version: 8.5.4
     react:
       specifier: ^18.3.1
       version: 18.3.1
@@ -39,6 +42,20 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
 
+  packages/tailwind:
+    devDependencies:
+      '@overline-zebar/typescript':
+        specifier: workspace:*
+        version: link:../typescript
+      tailwindcss:
+        specifier: 'catalog:'
+        version: 3.4.17
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
+
+  packages/typescript: {}
+
   ui:
     dependencies:
       clsx:
@@ -54,6 +71,12 @@ importers:
         specifier: ^2.6.0
         version: 2.6.0
     devDependencies:
+      '@overline-zebar/tailwind':
+        specifier: workspace:*
+        version: link:../packages/tailwind
+      '@overline-zebar/typescript':
+        specifier: workspace:*
+        version: link:../packages/typescript
       '@tsconfig/recommended':
         specifier: ^1.0.8
         version: 1.0.8
@@ -66,12 +89,24 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 18.3.7(@types/react@18.3.23)
+      autoprefixer:
+        specifier: ^10.4.20
+        version: 10.4.21(postcss@8.5.4)
+      postcss:
+        specifier: 'catalog:'
+        version: 8.5.4
+      tailwindcss:
+        specifier: 'catalog:'
+        version: 3.4.17
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
 
   widgets/main:
     dependencies:
+      '@overline-zebar/tailwind':
+        specifier: workspace:*
+        version: link:../../packages/tailwind
       '@overline-zebar/ui':
         specifier: workspace:*
         version: link:../../ui
@@ -118,6 +153,9 @@ importers:
       '@eslint/js':
         specifier: ^9.13.0
         version: 9.28.0
+      '@overline-zebar/typescript':
+        specifier: workspace:*
+        version: link:../../packages/typescript
       '@types/node':
         specifier: ^22.10.5
         version: 22.15.29
@@ -149,10 +187,10 @@ importers:
         specifier: ^15.11.0
         version: 15.15.0
       postcss:
-        specifier: ^8.4.49
+        specifier: 'catalog:'
         version: 8.5.4
       tailwindcss:
-        specifier: ^3.4.15
+        specifier: 'catalog:'
         version: 3.4.17
       typescript:
         specifier: ^5.7.2
@@ -166,6 +204,9 @@ importers:
 
   widgets/system-stats:
     dependencies:
+      '@overline-zebar/tailwind':
+        specifier: workspace:*
+        version: link:../../packages/tailwind
       '@overline-zebar/ui':
         specifier: workspace:*
         version: link:../../ui
@@ -212,6 +253,9 @@ importers:
       '@eslint/js':
         specifier: ^9.13.0
         version: 9.28.0
+      '@overline-zebar/typescript':
+        specifier: workspace:*
+        version: link:../../packages/typescript
       '@types/node':
         specifier: ^22.10.5
         version: 22.15.29
@@ -243,7 +287,7 @@ importers:
         specifier: ^15.11.0
         version: 15.15.0
       postcss:
-        specifier: ^8.4.49
+        specifier: 'catalog:'
         version: 8.5.4
       tailwindcss:
         specifier: 'catalog:'

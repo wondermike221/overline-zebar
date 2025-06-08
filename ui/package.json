@@ -1,9 +1,27 @@
 {
   "name": "@overline-zebar/ui",
-  "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
+  "version": "0.0.0",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./index.css": "./dist/index.css",
+    "./theme.css": "./src/theme.css"
+  },
+  "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc && tailwindcss -i ./src/index.css -o ./dist/index.css",
+    "check-types": "tsc --noEmit",
+    "dev": "tailwindcss -i ./src/index.css -o ./dist/index.css --watch",
+    "lint": "eslint src --max-warnings 0"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -12,10 +30,15 @@
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
+    "@overline-zebar/tailwind": "workspace:*",
+    "@overline-zebar/typescript": "workspace:*",
     "@tsconfig/recommended": "^1.0.8",
     "@types/node": "^22.15.29",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "autoprefixer": "^10.4.20",
+    "postcss": "catalog:",
+    "tailwindcss": "catalog:",
     "typescript": "^5.8.3"
   }
 }

@@ -5,16 +5,15 @@ import { Chip } from "./components/common/Chip";
 import Media from "./components/media";
 import Stat from "./components/stat";
 import { weatherThresholds } from "./components/stat/defaults/thresholds";
+import Systray from "./components/systray";
 import { TilingControl } from "./components/TilingControl";
 import VolumeControl from "./components/volume";
 import { WindowTitle } from "./components/windowTitle/WindowTitle";
 import { WorkspaceControls } from "./components/WorkspaceControls";
 import "./styles/fonts.css";
+import { calculateWidgetPlacementFromRight } from "./utils/calculateWidgetPlacement";
 import { useAutoTiling } from "./utils/useAutoTiling";
 import { getWeatherIcon } from "./utils/weatherIcons";
-import Systray from "./components/systray";
-import { useQuery } from "@tanstack/react-query";
-import { calculateWidgetPlacementFromRight } from "./utils/calculateWidgetPlacement";
 
 const providers = zebar.createProviderGroup({
   media: { type: "media" },
@@ -41,7 +40,7 @@ function App() {
   const chipRef = useRef<HTMLDivElement | null>(null);
 
   return (
-    <div className="relative flex justify-between items-center bg-background/80 border border-button-border/80 backdrop-blur-3xl text-text h-full antialiased select-none rounded-lg font-mono py-1.5 mx-1">
+    <div className="relative flex justify-between items-center bg-background/80 backdrop-blur-3xl text-text h-full antialiased select-none font-mono py-1.5 mx-1">
       <div className="flex items-center gap-2 h-full z-10 pl-1.5">
         <div className="flex items-center gap-1.5 h-full">
           <TilingControl glazewm={output.glazewm} />
