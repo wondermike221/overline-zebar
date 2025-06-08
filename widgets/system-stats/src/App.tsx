@@ -24,17 +24,17 @@ function App() {
     });
   }, []);
 
-  const sampleBattery = {
-    chargePercent: 76,
-    healthPercent: 92,
-    cycleCount: 483,
-    state: "discharging", // can also be: 'charging', 'full', 'empty', 'unknown'
-    isCharging: true,
-    timeTillEmpty: 7200000, // 2 hours in ms
-    timeTillFull: 7200000, // since not charging
-    powerConsumption: 12.5, // in watts
-    voltage: 11.4 // in volts
-  } satisfies zebar.BatteryOutput;
+  // const sampleBattery = {
+  //   chargePercent: 76,
+  //   healthPercent: 92,
+  //   cycleCount: 483,
+  //   state: "discharging", // can also be: 'charging', 'full', 'empty', 'unknown'
+  //   isCharging: true,
+  //   timeTillEmpty: 7200000, // 2 hours in ms
+  //   timeTillFull: 7200000, // since not charging
+  //   powerConsumption: 12.5, // in watts
+  //   voltage: 11.4 // in volts
+  // } satisfies zebar.BatteryOutput;
 
   return (
     <Router hook={useHashLocation}>
@@ -45,7 +45,7 @@ function App() {
           </div>
 
           <Switch>
-            <Route path="/" component={() => <Host host={output.host} battery={sampleBattery} />} />
+            <Route path="/" component={() => <Host host={output.host} battery={output.battery} />} />
           </Switch>
         </div>
       </div>
