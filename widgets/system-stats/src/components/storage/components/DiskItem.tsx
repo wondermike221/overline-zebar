@@ -1,6 +1,6 @@
-import type { Disk } from "zebar";
-import { StatRing, systemStatThresholds, Card } from "@overline-zebar/ui";
-import { HardDrive } from "lucide-react";
+import type { Disk } from 'zebar';
+import { StatRing, systemStatThresholds, Card } from '@overline-zebar/ui';
+import { HardDrive } from 'lucide-react';
 
 interface DiskItemProps {
   disk: Disk;

@@ -1,16 +1,16 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowDownUp, Pause, Play, SkipBack, SkipForward } from "lucide-react";
-import { usePlayPause } from "../../../utils/usePlayPause";
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowDownUp, Pause, Play, SkipBack, SkipForward } from 'lucide-react';
+import { usePlayPause } from '../../../utils/usePlayPause';
 
 export enum PlayPauseState {
-  Played = "played",
-  Paused = "paused",
+  Played = 'played',
+  Paused = 'paused',
 }
 
 export enum StatusAction {
-  Previous = "previous",
-  Next = "next",
-  Switch = "switch",
+  Previous = 'previous',
+  Next = 'next',
+  Switch = 'switch',
 }
 
 export function Status({ isPlaying }: { isPlaying: boolean }) {
@@ -18,7 +18,7 @@ export function Status({ isPlaying }: { isPlaying: boolean }) {
     usePlayPause(isPlaying);
 
   const icon = getIcon(trackAction, state);
-  const key = trackAction ?? (state ? "pause" : "play");
+  const key = trackAction ?? (state ? 'pause' : 'play');
 
   return (
     <AnimatePresence mode="popLayout">

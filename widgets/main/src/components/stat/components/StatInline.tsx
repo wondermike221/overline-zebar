@@ -1,5 +1,9 @@
-import { cn } from "../../../utils/cn";
-import { Thresholds, LabelType, systemStatThresholds as uiSystemStatThresholds } from "@overline-zebar/ui";
+import { cn } from '../../../utils/cn';
+import {
+  Thresholds,
+  LabelType,
+  systemStatThresholds as uiSystemStatThresholds,
+} from '@overline-zebar/ui';
 
 interface StatProps {
   Icon: React.ReactNode;
@@ -28,10 +32,10 @@ export function StatInline({
   return (
     <div
       className={cn(
-        "flex items-center justify-center gap-1.5",
-        thresholdLabel === LabelType.DEFAULT && "text-text",
-        thresholdLabel === LabelType.WARNING && "text-warning",
-        thresholdLabel === LabelType.DANGER && "text-danger"
+        'flex items-center justify-center gap-1.5',
+        thresholdLabel === LabelType.DEFAULT && 'text-text',
+        thresholdLabel === LabelType.WARNING && 'text-warning',
+        thresholdLabel === LabelType.DANGER && 'text-danger'
       )}
     >
       {Icon}

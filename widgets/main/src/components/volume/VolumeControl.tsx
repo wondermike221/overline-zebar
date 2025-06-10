@@ -1,9 +1,9 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { Volume, Volume1, Volume2 } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
-import { cn } from "../../utils/cn";
-import { Chip } from "../common/Chip";
-import Slider from "./components/Slider";
+import { AnimatePresence, motion } from 'framer-motion';
+import { Volume, Volume1, Volume2 } from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
+import { cn } from '../../utils/cn';
+import { Chip } from '../common/Chip';
+import Slider from './components/Slider';
 
 // TODO: Investigate AudioDevice type and why it's not exported. For now, just use any.
 export default function VolumeControl({
@@ -13,7 +13,7 @@ export default function VolumeControl({
 }: {
   playbackDevice: any;
   setVolume: any;
-  statIconClassnames: "h-3 w-3 text-icon";
+  statIconClassnames: 'h-3 w-3 text-icon';
 }) {
   const [expanded, setExpanded] = useState(false);
   const ref = useRef<HTMLButtonElement>(null);
@@ -61,9 +61,9 @@ export default function VolumeControl({
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
   if (!playbackDevice?.volume) return;
@@ -81,18 +81,18 @@ export default function VolumeControl({
 
         <div
           className={cn(
-            "transition duration-200 ease-in-out mx-1 w-full",
-            expanded && "mx-1.5"
+            'transition duration-200 ease-in-out mx-1 w-full',
+            expanded && 'mx-1.5'
           )}
         >
           <AnimatePresence initial={false}>
             {expanded && (
               <motion.div
                 initial={{ width: 0, opacity: 0 }}
-                animate={{ width: "auto", opacity: 1 }}
+                animate={{ width: 'auto', opacity: 1 }}
                 exit={{ width: 0, opacity: 0 }}
                 className="overflow-hidden"
-                transition={{ type: "spring", duration: 0.4, bounce: 0 }}
+                transition={{ type: 'spring', duration: 0.4, bounce: 0 }}
               >
                 <Slider value={playbackDevice.volume} setValue={setVolume} />
               </motion.div>

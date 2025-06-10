@@ -1,7 +1,7 @@
-import { Card, CardTitle } from "@overline-zebar/ui";
-import { BarChart3, Brain, Zap } from "lucide-react";
-import { CpuOutput } from "zebar";
-import PanelLayout from "../common/PanelLayout";
+import { Card, CardTitle } from '@overline-zebar/ui';
+import { BarChart3, Brain, Zap } from 'lucide-react';
+import { CpuOutput } from 'zebar';
+import PanelLayout from '../common/PanelLayout';
 
 interface CpuPanelProps {
   cpu: CpuOutput | null;

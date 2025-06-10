@@ -18,11 +18,11 @@ const loadConfig = async (): Promise<Config> => {
 
     const config = await response.json();
     console.info(
-      `Successfully loaded config with keys: ${Object.keys(config).join(", ")}`
+      `Successfully loaded config with keys: ${Object.keys(config).join(', ')}`
     );
     return config;
   } catch (error) {
-    console.error("Error loading config.json, using default values:", error);
+    console.error('Error loading config.json, using default values:', error);
     return {};
   }
 };
@@ -39,7 +39,7 @@ export const getStringFromConfig = async (
 ): Promise<string> => {
   const config = await loadConfig();
   const value = config[key];
-  if (typeof value === "string") {
+  if (typeof value === 'string') {
     return value;
   }
   return fallback;
@@ -59,10 +59,10 @@ export const getBooleanFromConfig = async (
   const value = config[key];
 
   if (value === undefined) return fallback;
-  if (typeof value === "boolean") return value;
+  if (typeof value === 'boolean') return value;
 
   // Handle string values like 'true', 'false'
-  return value === "true" || value === "1";
+  return value === 'true' || value === '1';
 };
 
 /**
@@ -87,26 +87,22 @@ export const getNumberFromConfig = async (
 // Common configuration values used in the application
 export const getFlowLauncherPath = async (): Promise<string> => {
   return await getStringFromConfig(
-    "FLOW_LAUNCHER_PATH",
-    "C:\\Program Files\\FlowLauncher\\Flow.Launcher.exe"
+    'FLOW_LAUNCHER_PATH',
+    'C:\\Program Files\\FlowLauncher\\Flow.Launcher.exe'
   );
 };
 
 export const getMediaMaxWidth = async (): Promise<string> => {
-  return await getStringFromConfig(
-    "MEDIA_MAX_WIDTH",
-    "400"
-  );
+  return await getStringFromConfig('MEDIA_MAX_WIDTH', '400');
 };
 
-
 export const getUseAutoTiling = async (): Promise<boolean> => {
-  return await getBooleanFromConfig("USE_AUTOTILING", false);
+  return await getBooleanFromConfig('USE_AUTOTILING', false);
 };
 
 export const getAutoTilingWebSocketUri = async (): Promise<string> => {
   return await getStringFromConfig(
-    "AUTOTILING_WEBSOCKET_URI",
-    "ws://localhost:6123"
+    'AUTOTILING_WEBSOCKET_URI',
+    'ws://localhost:6123'
   );
 };

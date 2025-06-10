@@ -1,9 +1,15 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
 import {
   getFlowLauncherPath,
   getUseAutoTiling,
   getAutoTilingWebSocketUri,
-  getMediaMaxWidth
+  getMediaMaxWidth,
 } from '../utils/getFromEnv';
 
 interface ConfigContextType {
@@ -19,7 +25,7 @@ const defaultConfig: ConfigContextType = {
   useAutoTiling: false,
   autoTilingWebSocketUri: 'ws://localhost:6123',
   mediaMaxWidth: '400',
-  isLoading: true
+  isLoading: true,
 };
 
 const ConfigContext = createContext<ConfigContextType>(defaultConfig);
@@ -36,7 +42,12 @@ export const ConfigProvider: React.FC<ConfigProviderProps> = ({ children }) => {
   useEffect(() => {
     const loadConfig = async () => {
       try {
-        const [flowLauncherPath, useAutoTiling, autoTilingWebSocketUri, mediaMaxWidth] = await Promise.all([
+        const [
+          flowLauncherPath,
+          useAutoTiling,
+          autoTilingWebSocketUri,
+          mediaMaxWidth,
+        ] = await Promise.all([
           getFlowLauncherPath(),
           getUseAutoTiling(),
           getAutoTilingWebSocketUri(),
@@ -48,11 +59,11 @@ export const ConfigProvider: React.FC<ConfigProviderProps> = ({ children }) => {
           useAutoTiling,
           autoTilingWebSocketUri,
           mediaMaxWidth,
-          isLoading: false
+          isLoading: false,
         });
       } catch (error) {
         console.error('Failed to load configuration:', error);
-        setConfig(prev => ({ ...prev, isLoading: false }));
+        setConfig((prev) => ({ ...prev, isLoading: false }));
       }
     };
 
@@ -60,8 +71,6 @@ export const ConfigProvider: React.FC<ConfigProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <ConfigContext.Provider value={config}>
-      {children}
-    </ConfigContext.Provider>
+    <ConfigContext.Provider value={config}>{children}</ConfigContext.Provider>
   );
 };

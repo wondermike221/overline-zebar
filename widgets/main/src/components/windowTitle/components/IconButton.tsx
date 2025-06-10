@@ -1,17 +1,13 @@
-import {
-  AnimatePresence,
-  HTMLMotionProps,
-  motion
-} from "framer-motion";
-import { LucideIcon } from "lucide-react";
-import React from "react";
-import { cn } from "../../../utils/cn";
+import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
+import { LucideIcon } from 'lucide-react';
+import React from 'react';
+import { cn } from '../../../utils/cn';
 
 interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: LucideIcon;
   animateKey?: string;
-  animateProps?: HTMLMotionProps<"div">;
+  animateProps?: HTMLMotionProps<'div'>;
 }
 
 // TODO: Shares same animation as Status. Maybe extract to a component?
@@ -29,9 +25,9 @@ export const IconButton = ({
   return (
     <button
       className={cn(
-        "h-full flex items-center justify-center text-icon",
-        "hover:text-text",
-        "transition-colors duration-200 ease-in-out"
+        'h-full flex items-center justify-center text-icon',
+        'hover:text-text',
+        'transition-colors duration-200 ease-in-out'
       )}
       {...props}
     >

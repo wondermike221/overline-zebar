@@ -1,4 +1,4 @@
-import { LabelType, Thresholds } from "@overline-zebar/ui";
+import { LabelType, Thresholds } from '@overline-zebar/ui';
 
 export const weatherThresholds: Thresholds = [
   { min: -10, max: 0, label: LabelType.DANGER },

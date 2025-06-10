@@ -1,8 +1,8 @@
-import { cn } from "../../utils/cn";
-import Ring from "./components/Ring";
-import { systemStatThresholds } from "./defaults/systemStatThresholds";
-import { LabelType } from "./types/labelType";
-import { Thresholds } from "./types/thresholds";
+import { cn } from '../../utils/cn';
+import Ring from './components/Ring';
+import { systemStatThresholds } from './defaults/systemStatThresholds';
+import { LabelType } from './types/labelType';
+import { Thresholds } from './types/thresholds';
 
 interface StatRingProps {
   Icon: React.ReactNode;
@@ -35,10 +35,10 @@ export function StatRing({
   return (
     <div
       className={cn(
-        "flex items-center justify-center gap-1.5",
-        thresholdLabel === LabelType.DEFAULT && "text-text",
-        thresholdLabel === LabelType.WARNING && "text-warning",
-        thresholdLabel === LabelType.DANGER && "text-danger"
+        'flex items-center justify-center gap-1.5',
+        thresholdLabel === LabelType.DEFAULT && 'text-text',
+        thresholdLabel === LabelType.WARNING && 'text-warning',
+        thresholdLabel === LabelType.DANGER && 'text-danger'
       )}
     >
       {Icon}
@@ -46,9 +46,9 @@ export function StatRing({
         className="w-3.5 h-3.5"
         percentage={statAsInt}
         strokeColor={cn(
-          thresholdLabel === LabelType.DEFAULT && "stroke-success",
-          thresholdLabel === LabelType.WARNING && "stroke-warning",
-          thresholdLabel === LabelType.DANGER && "stroke-danger"
+          thresholdLabel === LabelType.DEFAULT && 'stroke-success',
+          thresholdLabel === LabelType.WARNING && 'stroke-warning',
+          thresholdLabel === LabelType.DANGER && 'stroke-danger'
         )}
       />
     </div>

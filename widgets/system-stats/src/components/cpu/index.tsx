@@ -1,1 +1,1 @@
-export { default } from "./Cpu";
+export { default } from './Cpu';

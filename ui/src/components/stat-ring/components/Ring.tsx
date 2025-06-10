@@ -1,10 +1,10 @@
-import { cn } from "../../../utils/cn";
+import { cn } from '../../../utils/cn';
 
 const Ring = ({
   percentage,
   className,
-  strokeColor = "stroke-green-500",
-  backgroundColor = "stroke-background",
+  strokeColor = 'stroke-green-500',
+  backgroundColor = 'stroke-background',
   strokeWidth = 14,
 }: {
   percentage: number;
@@ -55,7 +55,7 @@ const Ring = ({
           strokeDasharray={circumference}
           strokeDashoffset={offset}
           transform="rotate(-90 50 50)"
-          style={{ transition: "stroke-dashoffset 0.5s ease" }}
+          style={{ transition: 'stroke-dashoffset 0.5s ease' }}
         />
       </svg>
     </div>

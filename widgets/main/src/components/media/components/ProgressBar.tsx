@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { MediaSession } from "zebar";
+import { useState, useEffect } from 'react';
+import { MediaSession } from 'zebar';
 
 export function ProgressBar({
   currentSession,
@@ -42,7 +42,7 @@ export function ProgressBar({
       style={{
         width: currentSession
           ? `${(progress / currentSession?.endTime) * 100 || 0}%`
-          : "0",
+          : '0',
       }}
     ></div>
   );

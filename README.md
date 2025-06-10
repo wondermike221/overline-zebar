@@ -34,15 +34,15 @@ A fully featured custom widget for [Zebar](https://github.com/glzr-io/zebar).
 Note: If you have local branches from the older branch, the layout has changed:
 
 ```
-main -> old/zebar-v2  
+main -> old/zebar-v2
 migrate/zebar-v3 -> main
 ```
 
 ### Option 1: The Zebar Marketplace
 
-1. Right-click the Zebar tray icon, and click **Browse Widgets**  
-2. Search for **"overline-zebar"**  
-3. Click **Install**  
+1. Right-click the Zebar tray icon, and click **Browse Widgets**
+2. Search for **"overline-zebar"**
+3. Click **Install**
 4. Continue to the [Configuration](#configuration) section
 
 ### Option 2: Build from Source
@@ -63,28 +63,28 @@ Choose this option if you want to:
 
 1. Clone the repository to your local machine inside the `.glzr` directory (e.g., `C:/Users/<USER>/.glzr/zebar` on Windows):
 
-    ```sh
-    git clone https://github.com/mushfikurr/overline-zebar.git
-    cd overline-zebar
-    ```
+   ```sh
+   git clone https://github.com/mushfikurr/overline-zebar.git
+   cd overline-zebar
+   ```
 
 2. Install all required dependencies:
 
-    ```sh
-    npm install
-    ```
+   ```sh
+   npm install
+   ```
 
-    This will install React, Vite, TailwindCSS, and all other dependencies needed for development.
+   This will install React, Vite, TailwindCSS, and all other dependencies needed for development.
 
 3. See the [Configuration](#configuration) section below for details on how to customize the widget by editing the `public/config.json` file.
 
 4. Build the project for production:
 
-    ```sh
-    npm run build
-    ```
+   ```sh
+   npm run build
+   ```
 
-    This creates a `dist` folder containing the compiled widget ready for use.
+   This creates a `dist` folder containing the compiled widget ready for use.
 
 ---
 
@@ -96,7 +96,7 @@ You can customize various aspects of overline-zebar by editing the `config.json`
 
 For general Zebar widget configuration:
 
-- Right-click the Zebar tray icon  
+- Right-click the Zebar tray icon
 - Go to **Widget Packs > overline-zebar > Pack Settings**
 
 **Recommended:** Adapt the width of Zebar to your gap and screen resolution.
@@ -105,15 +105,15 @@ For general Zebar widget configuration:
 
 - **For pre-built version users**, navigate to:
 
-    ```
-    C:\Users\<username>\.glzr\zebar\overline-zebar\dist\public\
-    ```
+  ```
+  C:\Users\<username>\.glzr\zebar\overline-zebar\dist\public\
+  ```
 
 - **For developers building from source**, navigate to:
 
-    ```
-    public/
-    ```
+  ```
+  public/
+  ```
 
 #### Configuration Values
 
@@ -150,9 +150,9 @@ Follow the steps to build the project from source.
 
 1. Start the build process with hot reloading:
 
-    ```sh
-    npm run build:watch
-    ```
+   ```sh
+   npm run build:watch
+   ```
 
 2. Edit code — Zebar will automatically restart on save (if the widget is selected in Zebar).
 3. Enable auto-save in your text editor for faster iteration.

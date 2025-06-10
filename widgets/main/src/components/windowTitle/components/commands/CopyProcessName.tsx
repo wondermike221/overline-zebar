@@ -1,9 +1,9 @@
-import { Check, Clipboard } from "lucide-react";
-import { useState } from "react";
-import { GlazeWmOutput } from "zebar";
-import { ContainerType } from "../../WindowTitle";
-import { IconButton } from "../IconButton";
-import { CommandProps } from "./types/command";
+import { Check, Clipboard } from 'lucide-react';
+import { useState } from 'react';
+import { GlazeWmOutput } from 'zebar';
+import { ContainerType } from '../../WindowTitle';
+import { IconButton } from '../IconButton';
+import { CommandProps } from './types/command';
 
 const getWindowProcess = (glazewm: GlazeWmOutput | null): string | null => {
   if (!glazewm) return null;
@@ -17,7 +17,7 @@ const getWindowProcess = (glazewm: GlazeWmOutput | null): string | null => {
 };
 
 export const CopyProcessName = ({ glazewm }: CommandProps) => {
-  const tooltipText = "Copy process name of the window";
+  const tooltipText = 'Copy process name of the window';
   const [copying, setCopying] = useState(false);
 
   const handleCopyProcessName = () => {
@@ -31,14 +31,14 @@ export const CopyProcessName = ({ glazewm }: CommandProps) => {
           setTimeout(() => setCopying(false), 750);
         })
         .catch((err) => {
-          console.error("Failed to copy text to clipboard:", err);
+          console.error('Failed to copy text to clipboard:', err);
         });
     }
   };
 
   return (
     <IconButton
-      animateKey={copying ? "copying" : "not-copying"}
+      animateKey={copying ? 'copying' : 'not-copying'}
       title={tooltipText}
       onClick={handleCopyProcessName}
       icon={copying ? Check : Clipboard}

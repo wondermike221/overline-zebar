@@ -1,8 +1,8 @@
-import React from "react";
-import { cn } from "../../utils/cn";
-import { LucideIcon } from "lucide-react";
+import React from 'react';
+import { cn } from '../../utils/cn';
+import { LucideIcon } from 'lucide-react';
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> { }
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, children, ...props }, ref) => {
@@ -10,7 +10,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          "p-2 border border-border rounded bg-background flex flex-col gap-1.5 w-full",
+          'p-2 border border-border rounded bg-background flex flex-col gap-1.5 w-full',
           className
         )}
         {...props}
@@ -21,7 +21,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
   }
 );
 
-Card.displayName = "Card";
+Card.displayName = 'Card';
 
 export { Card };
 
@@ -34,23 +34,16 @@ const CardTitle = React.forwardRef<HTMLDivElement, CardTitleProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          "flex items-center justify-between",
-          className
-        )}
+        className={cn('flex items-center justify-between', className)}
         {...props}
       >
-        <p className="font-medium text-text-muted">
-          {children}
-        </p>
+        <p className="font-medium text-text-muted">{children}</p>
         {Icon && <Icon className="h-5 w-5 text-text-muted" />}
       </div>
     );
   }
 );
 
-CardTitle.displayName = "CardTitle";
+CardTitle.displayName = 'CardTitle';
 
 export { CardTitle };
-
-

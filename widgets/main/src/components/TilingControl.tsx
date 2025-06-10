@@ -1,9 +1,9 @@
-import { ChevronRight, Search } from "lucide-react";
-import { cn } from "../utils/cn";
-import { Button } from "@overline-zebar/ui";
-import { GlazeWmOutput } from "zebar";
-import { motion, AnimatePresence } from "framer-motion";
-import { useConfig } from "../context/ConfigContext";
+import { ChevronRight, Search } from 'lucide-react';
+import { cn } from '../utils/cn';
+import { Button } from '@overline-zebar/ui';
+import { GlazeWmOutput } from 'zebar';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useConfig } from '../context/ConfigContext';
 
 interface TilingControlProps {
   glazewm: GlazeWmOutput | null;
@@ -22,7 +22,7 @@ export function TilingControl({ glazewm }: TilingControlProps) {
             key={bindingMode.name}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.15, ease: "easeInOut" }}
+            transition={{ duration: 0.15, ease: 'easeInOut' }}
             exit={{ opacity: 0 }}
             className="h-full"
           >
@@ -34,23 +34,23 @@ export function TilingControl({ glazewm }: TilingControlProps) {
       <Button
         onClick={() => {
           if (flowLauncherPath && !isLoading) {
-            console.log("Flow Launcher path:", flowLauncherPath);
+            console.log('Flow Launcher path:', flowLauncherPath);
             glazewm.runCommand(`shell-exec ${flowLauncherPath}`);
           } else if (isLoading) {
-            console.warn("Configuration is still loading...");
+            console.warn('Configuration is still loading...');
           } else {
-            console.warn("Flow Launcher path not configured in config.json");
+            console.warn('Flow Launcher path not configured in config.json');
           }
         }}
       >
         <Search strokeWidth={3} className="h-3 w-3" />
       </Button>
 
-      <Button onClick={() => glazewm.runCommand("toggle-tiling-direction")}>
+      <Button onClick={() => glazewm.runCommand('toggle-tiling-direction')}>
         <ChevronRight
           className={cn(
-            "h-3 w-3 transition-transform duration-200 ease-in-out",
-            glazewm.tilingDirection === "vertical" ? "rotate-90" : ""
+            'h-3 w-3 transition-transform duration-200 ease-in-out',
+            glazewm.tilingDirection === 'vertical' ? 'rotate-90' : ''
           )}
           strokeWidth={3}
         />

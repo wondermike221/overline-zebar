@@ -1,11 +1,11 @@
-import { Card, CardTitle } from "@overline-zebar/ui";
-import { ArrowDown, Globe, Rss } from "lucide-react";
-import * as zebar from "zebar";
-import List from "./List";
+import { Card, CardTitle } from '@overline-zebar/ui';
+import { ArrowDown, Globe, Rss } from 'lucide-react';
+import * as zebar from 'zebar';
+import List from './List';
 
 const formatSpeed = (bytesPerSecond: number | null | undefined): string => {
-  if (!bytesPerSecond || bytesPerSecond < 0) return "N/A";
-  if (bytesPerSecond === 0) return "0 Mbps";
+  if (!bytesPerSecond || bytesPerSecond < 0) return 'N/A';
+  if (bytesPerSecond === 0) return '0 Mbps';
   const bps = bytesPerSecond * 8;
   if (bps >= 1_000_000) return `${(bps / 1_000_000).toFixed(2)} Mbps`;
   if (bps >= 1_000) return `${(bps / 1_000).toFixed(2)} Kbps`;
@@ -24,9 +24,7 @@ export default function InterfaceDetails({ iface }: Props) {
       </h3>
       <p className="">{iface.description}</p>
       <section className="space-y-1.5">
-        <h3
-          className="font-medium flex items-center text-text-muted gap-2"
-        >
+        <h3 className="font-medium flex items-center text-text-muted gap-2">
           <Rss className="h-5 w-5" aria-hidden="true" />
           Connection Speed
         </h3>
@@ -37,19 +35,13 @@ export default function InterfaceDetails({ iface }: Props) {
           </Card>
           <Card className="space-y-1.5">
             <div className="text-text-muted">Transmit</div>
-            <div
-              className="text-text"
-            >
-              {iface.transmitSeed}
-            </div>
+            <div className="text-text">{iface.transmitSeed}</div>
           </Card>
         </div>
       </section>
 
       <section className="space-y-1.5">
-        <h3
-          className="font-medium flex items-center text-text-muted gap-2"
-        >
+        <h3 className="font-medium flex items-center text-text-muted gap-2">
           <Globe className="h-5 w-5" aria-hidden="true" />
           Network Addresses
         </h3>
@@ -57,7 +49,7 @@ export default function InterfaceDetails({ iface }: Props) {
         <Card className="space-y-1.5">
           <div>
             <p className="text-text-muted">MAC Address</p>
-            <p>{iface.macAddress || "N/A"}</p>
+            <p>{iface.macAddress || 'N/A'}</p>
           </div>
           <div>
             <p className="text-text-muted">IPv4 Addresses</p>

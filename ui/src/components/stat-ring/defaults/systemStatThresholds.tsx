@@ -1,5 +1,5 @@
-import { LabelType } from "../types/labelType";
-import { Thresholds } from "../types/thresholds";
+import { LabelType } from '../types/labelType';
+import { Thresholds } from '../types/thresholds';
 
 export const systemStatThresholds: Thresholds = [
   { min: 0, max: 70, label: LabelType.DEFAULT },

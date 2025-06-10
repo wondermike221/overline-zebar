@@ -1,13 +1,10 @@
-import { Card } from "@overline-zebar/ui";
-import {
-  Info,
-  Wifi
-} from "lucide-react";
-import { useSearchParams } from "wouter";
-import * as zebar from "zebar";
-import PanelLayout from "../common/PanelLayout";
-import InterfaceDetails from "./components/InterfaceDetails";
-import Traffic from "./components/Traffic";
+import { Card } from '@overline-zebar/ui';
+import { Info, Wifi } from 'lucide-react';
+import { useSearchParams } from 'wouter';
+import * as zebar from 'zebar';
+import PanelLayout from '../common/PanelLayout';
+import InterfaceDetails from './components/InterfaceDetails';
+import Traffic from './components/Traffic';
 
 interface NetworkPanelProps {
   network: {
@@ -31,12 +28,13 @@ export default function Network({ network }: NetworkPanelProps) {
   }
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const tab = searchParams.get("tab") || "default";
+  const tab = searchParams.get('tab') || 'default';
 
   const defaultInterface =
     network.interfaces.find((iface) => iface.isDefault) ||
     network.interfaces[0];
-  const currInterface = network.interfaces.find((iface) => iface.name === tab) ?? defaultInterface;
+  const currInterface =
+    network.interfaces.find((iface) => iface.name === tab) ?? defaultInterface;
 
   if (!currInterface) {
     return (
@@ -62,8 +60,9 @@ export default function Network({ network }: NetworkPanelProps) {
 
   return (
     <PanelLayout
-      title={`Network: ${defaultInterface.friendlyName || defaultInterface.name
-        }`}
+      title={`Network: ${
+        defaultInterface.friendlyName || defaultInterface.name
+      }`}
       className="space-y-6"
     >
       <Traffic traffic={network.traffic} />
@@ -72,7 +71,7 @@ export default function Network({ network }: NetworkPanelProps) {
       {network.gateway && (
         <Card>
           <h3 className="font-medium mb-1 text-sm">
-            Gateway {network.gateway.ssid ? `(${network.gateway.ssid})` : ""}
+            Gateway {network.gateway.ssid ? `(${network.gateway.ssid})` : ''}
           </h3>
           <div className="grid grid-cols-2 gap-x-3 gap-y-1">
             <div>
@@ -80,11 +79,11 @@ export default function Network({ network }: NetworkPanelProps) {
               <p>{network.gateway.macAddress}</p>
             </div>
             {network.gateway.signalStrength !== null &&
-              typeof network.gateway.signalStrength !== "undefined" && (
+              typeof network.gateway.signalStrength !== 'undefined' && (
                 <div>
                   <p className="text-text-muted">Signal Strength</p>
                   <p className="flex items-center">
-                    <Wifi className="w-3 h-3 mr-1" />{" "}
+                    <Wifi className="w-3 h-3 mr-1" />{' '}
                     {network.gateway.signalStrength}%
                   </p>
                 </div>
@@ -108,7 +107,6 @@ export default function Network({ network }: NetworkPanelProps) {
           </div>
         </Card>
       )}
-
     </PanelLayout>
   );
 }

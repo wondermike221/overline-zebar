@@ -1,12 +1,12 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { AppWindowIcon } from "lucide-react";
-import { forwardRef, useState } from "react";
-import { GlazeWmOutput } from "zebar";
-import { WindowControls } from "./components/WindowControls";
+import { motion, AnimatePresence } from 'framer-motion';
+import { AppWindowIcon } from 'lucide-react';
+import { forwardRef, useState } from 'react';
+import { GlazeWmOutput } from 'zebar';
+import { WindowControls } from './components/WindowControls';
 
 type WindowTitleProps = {
   glazewm: GlazeWmOutput | null;
-}
+};
 
 export const WindowTitle = forwardRef<HTMLButtonElement, WindowTitleProps>(
   ({ glazewm }, ref) => {
@@ -24,7 +24,7 @@ export const WindowTitle = forwardRef<HTMLButtonElement, WindowTitleProps>(
             console.log(`Copied to clipboard: ${textToCopy}`);
           })
           .catch((err) => {
-            console.error("Failed to copy text to clipboard:", err);
+            console.error('Failed to copy text to clipboard:', err);
           });
         return;
       }
@@ -36,14 +36,16 @@ export const WindowTitle = forwardRef<HTMLButtonElement, WindowTitleProps>(
       <AnimatePresence mode="wait">
         <motion.button
           ref={ref}
-          key={title ?? "default-icon"}
+          key={title ?? 'default-icon'}
           initial={{ opacity: 0, y: -ANIMATION_EXIT_OFFSET }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: ANIMATION_EXIT_OFFSET }}
-          transition={{ duration: 0.15, ease: "easeInOut" }}
+          transition={{ duration: 0.15, ease: 'easeInOut' }}
           className="font-medium relative h-full flex items-center cu"
-          title={title ?? "Focused Window"}
-          onClick={(e: React.MouseEvent) => handleWindowTitle(e, getWindowProcess(glazewm) ?? "")}
+          title={title ?? 'Focused Window'}
+          onClick={(e: React.MouseEvent) =>
+            handleWindowTitle(e, getWindowProcess(glazewm) ?? '')
+          }
         >
           {title ?? <AppWindowIcon className="h-4 w-4 text-icon" />}
           <WindowControls
@@ -59,14 +61,14 @@ export const WindowTitle = forwardRef<HTMLButtonElement, WindowTitleProps>(
 );
 
 export enum ContainerType {
-  ROOT = "root",
-  MONITOR = "monitor",
-  WORKSPACE = "workspace",
-  SPLIT = "split",
-  WINDOW = "window",
+  ROOT = 'root',
+  MONITOR = 'monitor',
+  WORKSPACE = 'workspace',
+  SPLIT = 'split',
+  WINDOW = 'window',
 }
 
-const SPLIT_WINDOW_PROCESS_EXCLUSIONS = ["Spotify"];
+const SPLIT_WINDOW_PROCESS_EXCLUSIONS = ['Spotify'];
 const SPLIT_WINDOW_TITLE_REGEX = /[-—]/;
 
 const getWindowTitle = (glazewm: GlazeWmOutput): string | null => {
@@ -78,7 +80,7 @@ const getWindowTitle = (glazewm: GlazeWmOutput): string | null => {
     const focusedContainerProcess = focusedContainer.processName;
 
     const isExcluded =
-      typeof focusedContainerProcess === "string" &&
+      typeof focusedContainerProcess === 'string' &&
       SPLIT_WINDOW_PROCESS_EXCLUSIONS.some((exclusion) =>
         focusedContainerProcess.startsWith(exclusion)
       );
@@ -88,7 +90,7 @@ const getWindowTitle = (glazewm: GlazeWmOutput): string | null => {
 
     const lastSplitWindowTitle = isExcluded
       ? focusedContainerProcess
-      : splitWindowTitle.at(-1) ?? focusedContainerTitle;
+      : (splitWindowTitle.at(-1) ?? focusedContainerTitle);
 
     return lastSplitWindowTitle;
   }

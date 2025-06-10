@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { SystrayOutput } from "zebar";
-import { ExpandingCarousel } from "./components/ExpandingCarousel";
-import { SystrayItem } from "./components/SystrayItem";
+import { useState } from 'react';
+import { SystrayOutput } from 'zebar';
+import { ExpandingCarousel } from './components/ExpandingCarousel';
+import { SystrayItem } from './components/SystrayItem';
 
 type SystrayProps = {
   systray: SystrayOutput | null;
-}
+};
 
 export default function Systray({ systray }: SystrayProps) {
   if (!systray) return;
@@ -20,14 +20,21 @@ export default function Systray({ systray }: SystrayProps) {
       e.preventDefault();
       setExpanded(!expanded);
     }
-  }
+  };
 
-  const systrayIcons = icons.map((item) => <SystrayItem key={item.id} systray={systray} icon={item} />);
+  const systrayIcons = icons.map((item) => (
+    <SystrayItem key={item.id} systray={systray} icon={item} />
+  ));
 
   return (
     <div className="flex items-center gap-1.5" onClick={handleClick}>
-      <ExpandingCarousel items={systrayIcons} expanded={expanded} gap={6} itemWidth={16} visibleCount={ICON_CUTOFF} />
+      <ExpandingCarousel
+        items={systrayIcons}
+        expanded={expanded}
+        gap={6}
+        itemWidth={16}
+        visibleCount={ICON_CUTOFF}
+      />
     </div>
-  )
+  );
 }
-

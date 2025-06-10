@@ -1,6 +1,6 @@
-import * as RadixSlider from "@radix-ui/react-slider";
-import { motion, useMotionValue, useMotionValueEvent } from "framer-motion";
-import { ElementRef, useRef, useState } from "react";
+import * as RadixSlider from '@radix-ui/react-slider';
+import { motion, useMotionValue, useMotionValueEvent } from 'framer-motion';
+import { ElementRef, useRef, useState } from 'react';
 
 const MAX_OVERFLOW = 50;
 
@@ -11,24 +11,24 @@ export default function Slider({
   value: number;
   setValue: any;
 }) {
-  let ref = useRef<ElementRef<typeof RadixSlider.Root>>(null);
-  let [region, setRegion] = useState("middle");
-  let clientX = useMotionValue(0);
-  let overflow = useMotionValue(0);
+  const ref = useRef<ElementRef<typeof RadixSlider.Root>>(null);
+  const [region, setRegion] = useState('middle');
+  const clientX = useMotionValue(0);
+  const overflow = useMotionValue(0);
 
-  useMotionValueEvent(clientX, "change", (latest) => {
+  useMotionValueEvent(clientX, 'change', (latest) => {
     if (ref.current) {
-      let { left, right } = ref.current.getBoundingClientRect();
+      const { left, right } = ref.current.getBoundingClientRect();
       let newValue;
 
       if (latest < left) {
-        setRegion("left");
+        setRegion('left');
         newValue = left - latest;
       } else if (latest > right) {
-        setRegion("right");
+        setRegion('right');
         newValue = latest - right;
       } else {
-        setRegion("middle");
+        setRegion('middle');
         newValue = 0;
       }
 
@@ -74,8 +74,8 @@ function decay(value: number, max: number) {
     return 0;
   }
 
-  let entry = value / max;
-  let sigmoid = 2 * (1 / (1 + Math.exp(-entry)) - 0.5);
+  const entry = value / max;
+  const sigmoid = 2 * (1 / (1 + Math.exp(-entry)) - 0.5);
 
   return sigmoid * max;
 }

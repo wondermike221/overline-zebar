@@ -1,6 +1,5 @@
-
-import type { RefObject } from "react";
-import { currentWidget, WidgetPlacement } from "zebar";
+import type { RefObject } from 'react';
+import { currentWidget, WidgetPlacement } from 'zebar';
 
 type Size = { width: number; height: number };
 
@@ -16,15 +15,15 @@ export const calculateWidgetPlacementFromRight = async (
   const gap = documentRight - elementRight;
 
   return {
-    anchor: "top_right",
+    anchor: 'top_right',
     offsetX: `-${gap - 0}px`,
     offsetY: `${windowSize.height + 6}px`,
     width: `${size.width}px`,
     height: `${size.height}px`,
-    monitorSelection: { type: "all" },
+    monitorSelection: { type: 'all' },
     dockToEdge: {
       enabled: false,
-      edge: "top",
+      edge: 'top',
       windowMargin: `${windowSize.height}px`,
     },
   } satisfies WidgetPlacement;
@@ -39,17 +38,16 @@ export const calculateWidgetPlacementFromLeft = async (
   const elementLeft = (rect?.left ?? 0) + window.scrollX;
 
   return {
-    anchor: "top_left",
+    anchor: 'top_left',
     offsetX: `${elementLeft}px`,
     offsetY: `${windowSize.height + 6}px`,
     width: `${size.width}px`,
     height: `${size.height}px`,
-    monitorSelection: { type: "all" },
+    monitorSelection: { type: 'all' },
     dockToEdge: {
       enabled: false,
-      edge: "top",
+      edge: 'top',
       windowMargin: `${windowSize.height}px`,
     },
   } satisfies WidgetPlacement;
 };
-

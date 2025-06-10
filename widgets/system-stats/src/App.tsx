@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { Route, Router, Switch } from "wouter";
-import { useHashLocation } from "wouter/use-hash-location";
-import * as zebar from "zebar";
-import Navbar from "./components/navbar";
-import Host from "./components/host";
-import Storage from "./components/storage";
-import Cpu from "./components/cpu";
-import Network from "./components/network";
+import { useEffect, useState } from 'react';
+import { Route, Router, Switch } from 'wouter';
+import { useHashLocation } from 'wouter/use-hash-location';
+import * as zebar from 'zebar';
+import Navbar from './components/navbar';
+import Host from './components/host';
+import Storage from './components/storage';
+import Cpu from './components/cpu';
+import Network from './components/network';
 
 const providers = zebar.createProviderGroup({
-  cpu: { type: "cpu" },
-  memory: { type: "memory" },
-  weather: { type: "weather" },
-  host: { type: "host" },
-  battery: { type: "battery" },
-  disk: { type: "disk" },
-  network: { type: "network" }, // Added network provider
+  cpu: { type: 'cpu' },
+  memory: { type: 'memory' },
+  weather: { type: 'weather' },
+  host: { type: 'host' },
+  battery: { type: 'battery' },
+  disk: { type: 'disk' },
+  network: { type: 'network' }, // Added network provider
 });
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {
     providers.onOutput(() => setOutput(providers.outputMap));
 
-    zebar.currentWidget().tauriWindow.listen("tauri://blur", () => {
+    zebar.currentWidget().tauriWindow.listen('tauri://blur', () => {
       zebar.currentWidget().close();
     });
   }, []);

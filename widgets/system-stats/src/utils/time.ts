@@ -10,5 +10,5 @@ export function formatMsToHumanDuration(ms: number): string {
   if (hours > 0 || days > 0) parts.push(`${hours}h`);
   if (minutes > 0 || hours > 0 || days > 0) parts.push(`${minutes}m`);
   if (parts.length === 0) parts.push(`${seconds}s`);
-  return parts.join(" ");
+  return parts.join(' ');
 }

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { StatusAction } from "../components/media/components/Status";
+import { useEffect, useState } from 'react';
+import { StatusAction } from '../components/media/components/Status';
 
 interface PlayPauseState {
   isPlaying: boolean;
@@ -46,14 +46,14 @@ export function usePlayPause(isPlaying: boolean) {
       setPlayPauseState((prev) => ({ ...prev, statusAction: null }));
     };
 
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("keyup", handleKeyUp);
-    window.addEventListener("blur", handleBlur);
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
+    window.addEventListener('blur', handleBlur);
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("keyup", handleKeyUp);
-      window.removeEventListener("blur", handleBlur);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener('blur', handleBlur);
     };
   }, [keyActionMap]);
 

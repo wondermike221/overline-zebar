@@ -1,7 +1,7 @@
-import { BatteryOutput, HostOutput } from "zebar";
-import { BatterySection } from "./components/BatterySection";
-import { formatMsToHumanDuration } from "@/utils/time";
-import PanelLayout from "../common/PanelLayout";
+import { BatteryOutput, HostOutput } from 'zebar';
+import { BatterySection } from './components/BatterySection';
+import { formatMsToHumanDuration } from '@/utils/time';
+import PanelLayout from '../common/PanelLayout';
 
 export default function Host({
   host,

@@ -1,4 +1,4 @@
-import { Button } from "@overline-zebar/ui";
+import { Button } from '@overline-zebar/ui';
 import {
   Cloud,
   Cpu,
@@ -6,11 +6,10 @@ import {
   HardDrive,
   LucideIcon,
   MemoryStick,
-  Network,
   Server,
-} from "lucide-react";
-import { useLocation } from "wouter";
-import { cn } from "../../utils/cn";
+} from 'lucide-react';
+import { useLocation } from 'wouter';
+import { cn } from '../../utils/cn';
 
 export default function Navbar() {
   return (
@@ -43,11 +42,14 @@ function IconNavbarItem({
     <Button
       onClick={handleClick}
       className={cn(
-        "group flex items-center gap-2 h-full px-4 bg-button/60 border-none border-b border-border rounded-none last:rounded-bl-md last:border-b-0",
-        location === href && "bg-background hover:bg-background text-text"
+        'group flex items-center gap-2 h-full px-4 bg-button/60 border-none border-b border-border rounded-none last:rounded-bl-md last:border-b-0',
+        location === href && 'bg-background hover:bg-background text-text'
       )}
     >
-      <Icon strokeWidth={2.6} className="h-5 w-5 text-icon group-hover:text-text transition-colors ease-in-out duration-200" />
+      <Icon
+        strokeWidth={2.6}
+        className="h-5 w-5 text-icon group-hover:text-text transition-colors ease-in-out duration-200"
+      />
       {title && title}
     </Button>
   );

@@ -1,4 +1,4 @@
-import { cn } from "../utils/cn";
+import { cn } from '../utils/cn';
 
 export const buttonStyles = `bg-button border-button-border text-text-muted border px-1.5 rounded-md drop-shadow-md h-full
    hover:bg-button-border hover:text-text
@@ -7,14 +7,14 @@ export const buttonStyles = `bg-button border-button-border text-text-muted bord
   `;
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-	children: React.ReactNode;
-	className?: string;
+  children: React.ReactNode;
+  className?: string;
 }
 
 export function Button({ children, className, ...props }: ButtonProps) {
-	return (
-		<button className={cn(buttonStyles, className)} {...props}>
-			{children}
-		</button>
-	);
+  return (
+    <button className={cn(buttonStyles, className)} {...props}>
+      {children}
+    </button>
+  );
 }

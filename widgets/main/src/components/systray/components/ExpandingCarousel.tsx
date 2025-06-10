@@ -1,4 +1,11 @@
-import { animate, AnimatePresence, motion, useMotionTemplate, useMotionValue, useTransform } from 'framer-motion';
+import {
+  animate,
+  AnimatePresence,
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useTransform,
+} from 'framer-motion';
 import React, { ReactElement, useEffect } from 'react';
 interface ExpandingCarouselProps {
   items: ReactElement[];
@@ -22,7 +29,7 @@ export const ExpandingCarousel: React.FC<ExpandingCarouselProps> = ({
   visibleCount = 4,
   itemWidth = 128,
   gap = 8,
-  fadeEdgeOffset = 10
+  fadeEdgeOffset = 10,
 }) => {
   const totalItems = items.length;
   const fullWidth = totalItems * itemWidth + (totalItems - 1) * gap;
@@ -30,14 +37,14 @@ export const ExpandingCarousel: React.FC<ExpandingCarouselProps> = ({
   const startIndex = Math.max(0, Math.floor((totalItems - visibleCount) / 2));
   const initialOffset = -(startIndex * (itemWidth + gap));
 
-  const leftEdge = fadeEdgeOffset + "%";
-  const rightEdge = 100 - fadeEdgeOffset + "%";
+  const leftEdge = fadeEdgeOffset + '%';
+  const rightEdge = 100 - fadeEdgeOffset + '%';
   const edgeOpacity = useMotionValue(1);
   const edgeColor = useTransform(edgeOpacity, (val) => `rgba(0,0,0,${val})`);
   const gradient = useMotionTemplate`linear-gradient(to right, ${edgeColor} 0%, black ${leftEdge}, black ${rightEdge}, ${edgeColor} 100%)`;
   useEffect(() => {
-    animate(edgeOpacity, (expanded) ? 1 : 0.3, { duration: 1.4 });
-  }, [expanded])
+    animate(edgeOpacity, expanded ? 1 : 0.3, { duration: 1.4 });
+  }, [expanded]);
 
   return (
     <div className="w-full flex justify-center items-center">
@@ -77,11 +84,11 @@ export const ExpandingCarousel: React.FC<ExpandingCarouselProps> = ({
                   ...springConfig,
                   delay: index * 0.08,
                   layout: {
-                    type: "spring",
+                    type: 'spring',
                     stiffness: 320,
                     damping: 20,
                     mass: 0.4,
-                  }
+                  },
                 }}
               >
                 {item}
@@ -93,4 +100,3 @@ export const ExpandingCarousel: React.FC<ExpandingCarouselProps> = ({
     </div>
   );
 };
-

@@ -1,29 +1,29 @@
-import { useEffect, useRef, useState } from "react";
-import * as zebar from "zebar";
-import { Center } from "./components/Center";
-import { Chip } from "./components/common/Chip";
-import Media from "./components/media";
-import Stat from "./components/stat";
-import { weatherThresholds } from "./components/stat/defaults/thresholds";
-import Systray from "./components/systray";
-import { TilingControl } from "./components/TilingControl";
-import VolumeControl from "./components/volume";
-import { WindowTitle } from "./components/windowTitle/WindowTitle";
-import { WorkspaceControls } from "./components/WorkspaceControls";
-import { calculateWidgetPlacementFromRight } from "./utils/calculateWidgetPlacement";
-import { useAutoTiling } from "./utils/useAutoTiling";
-import { getWeatherIcon } from "./utils/weatherIcons";
+import { useEffect, useRef, useState } from 'react';
+import * as zebar from 'zebar';
+import { Center } from './components/Center';
+import { Chip } from './components/common/Chip';
+import Media from './components/media';
+import Stat from './components/stat';
+import { weatherThresholds } from './components/stat/defaults/thresholds';
+import Systray from './components/systray';
+import { TilingControl } from './components/TilingControl';
+import VolumeControl from './components/volume';
+import { WindowTitle } from './components/windowTitle/WindowTitle';
+import { WorkspaceControls } from './components/WorkspaceControls';
+import { calculateWidgetPlacementFromRight } from './utils/calculateWidgetPlacement';
+import { useAutoTiling } from './utils/useAutoTiling';
+import { getWeatherIcon } from './utils/weatherIcons';
 
 const providers = zebar.createProviderGroup({
-  media: { type: "media" },
-  network: { type: "network" },
-  glazewm: { type: "glazewm" },
-  cpu: { type: "cpu" },
-  date: { type: "date", formatting: "EEE d MMM t", locale: "en-GB" },
-  memory: { type: "memory" },
-  weather: { type: "weather" },
-  audio: { type: "audio" },
-  systray: { type: "systray" },
+  media: { type: 'media' },
+  network: { type: 'network' },
+  glazewm: { type: 'glazewm' },
+  cpu: { type: 'cpu' },
+  date: { type: 'date', formatting: 'EEE d MMM t', locale: 'en-GB' },
+  memory: { type: 'memory' },
+  weather: { type: 'weather' },
+  audio: { type: 'audio' },
+  systray: { type: 'systray' },
 });
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
 
   useAutoTiling();
 
-  const statIconClassnames = "h-3 w-3 text-icon";
+  const statIconClassnames = 'h-3 w-3 text-icon';
   const chipRef = useRef<HTMLDivElement | null>(null);
 
   return (
@@ -70,7 +70,7 @@ function App() {
                 chipRef,
                 { width: 400, height: 200 }
               );
-              zebar.startWidget("system-stats", widgetPlacement, {});
+              zebar.startWidget('system-stats', widgetPlacement, {});
             }}
           >
             {output.cpu && (
@@ -114,15 +114,15 @@ function App() {
 
         <div className="h-full flex items-center justify-center pr-2">
           {output?.date?.formatted ??
-            new Intl.DateTimeFormat("en-GB", {
-              weekday: "short", // EEE
-              day: "numeric", // d
-              month: "short", // MMM
-              hour: "numeric", // t (hour part)
-              minute: "numeric", // t (minute part)
+            new Intl.DateTimeFormat('en-GB', {
+              weekday: 'short', // EEE
+              day: 'numeric', // d
+              month: 'short', // MMM
+              hour: 'numeric', // t (hour part)
+              minute: 'numeric', // t (minute part)
             })
               .format(new Date())
-              .replace(/,/g, "")}
+              .replace(/,/g, '')}
         </div>
       </div>
     </div>

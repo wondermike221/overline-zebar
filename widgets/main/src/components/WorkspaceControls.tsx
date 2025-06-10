@@ -1,20 +1,20 @@
-import { buttonStyles } from "@overline-zebar/ui";
-import { motion } from "framer-motion";
-import useMeasure from "react-use-measure";
-import { GlazeWmOutput } from "zebar";
-import { cn } from "../utils/cn";
-import { Chip } from "./common/Chip";
+import { buttonStyles } from '@overline-zebar/ui';
+import { motion } from 'framer-motion';
+import useMeasure from 'react-use-measure';
+import { GlazeWmOutput } from 'zebar';
+import { cn } from '../utils/cn';
+import { Chip } from './common/Chip';
 
 type WorkspaceControlsProps = {
   glazewm: GlazeWmOutput | null;
-}
+};
 export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
   if (!glazewm) return;
   const workspaces = glazewm.currentWorkspaces;
 
   const [ref, { width }] = useMeasure();
   const springConfig = {
-    type: "spring",
+    type: 'spring',
     stiffness: 120,
     damping: 20,
     mass: 0.8,
@@ -29,7 +29,7 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
       glazewm.runCommand(`focus --workspace ${newWorkspaceName}`);
     } else {
       const command =
-        delta > 0 ? "focus --next-workspace" : "focus --prev-workspace";
+        delta > 0 ? 'focus --next-workspace' : 'focus --prev-workspace';
       glazewm.runCommand(command);
     }
   };
@@ -38,15 +38,15 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
     <motion.div
       key="workspace-control-panel"
       initial={{ width: 0, opacity: 0 }}
-      animate={{ width: width || "auto", opacity: 1 }}
+      animate={{ width: width || 'auto', opacity: 1 }}
       exit={{ width: 0, opacity: 0 }}
       transition={springConfig}
       className="relative overflow-hidden h-full"
     >
       <Chip
         className={cn(
-          width ? "absolute" : "relative",
-          "flex items-center gap-1.5 select-none overflow-hidden px-[2px] h-full"
+          width ? 'absolute' : 'relative',
+          'flex items-center gap-1.5 select-none overflow-hidden px-[2px] h-full'
         )}
         as="div"
         ref={ref}
@@ -61,16 +61,16 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
                 glazewm.runCommand(`focus --workspace ${workspace.name}`)
               }
               className={cn(
-                "relative rounded-xl px-2 transition duration-500 ease-in-out text-text-muted h-full",
-                isFocused ? "" : "hover:text-text",
+                'relative rounded-xl px-2 transition duration-500 ease-in-out text-text-muted h-full',
+                isFocused ? '' : 'hover:text-text',
                 isFocused &&
-                "text-text duration-700 transition-all ease-in-out font-medium"
+                  'text-text duration-700 transition-all ease-in-out font-medium'
               )}
               style={{
-                WebkitTapHighlightColor: "transparent",
+                WebkitTapHighlightColor: 'transparent',
               }}
             >
-              <p className={cn("z-10")}>
+              <p className={cn('z-10')}>
                 {workspace.displayName ?? workspace.name}
               </p>
 
@@ -79,10 +79,10 @@ export function WorkspaceControls({ glazewm }: WorkspaceControlsProps) {
                   layoutId="bubble"
                   className={cn(
                     buttonStyles,
-                    "bg-primary border-primary-border drop-shadow-sm rounded-[0.5rem] absolute inset-0 -z-10",
-                    isFocused && "hover:bg-primary"
+                    'bg-primary border-primary-border drop-shadow-sm rounded-[0.5rem] absolute inset-0 -z-10',
+                    isFocused && 'hover:bg-primary'
                   )}
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                 />
               )}
             </button>
