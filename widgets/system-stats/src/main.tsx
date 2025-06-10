@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./styles/theme.css";
-import "./styles/fonts.css";
-import "./styles/index.css";
-import "@overline-zebar/ui/index.css"
+import "./index.css";
+import "@overline-zebar/ui/theme.css";
+import "@overline-zebar/ui/index.css";
+import "@overline-zebar/ui/fonts.css";
 import App from "./App";
 import { ConfigProvider } from "./context/ConfigContext";
 

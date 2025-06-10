@@ -4,6 +4,9 @@ import { useHashLocation } from "wouter/use-hash-location";
 import * as zebar from "zebar";
 import Navbar from "./components/navbar";
 import Host from "./components/host";
+import Storage from "./components/storage";
+import Cpu from "./components/cpu";
+import Network from "./components/network";
 
 const providers = zebar.createProviderGroup({
   cpu: { type: "cpu" },
@@ -11,6 +14,8 @@ const providers = zebar.createProviderGroup({
   weather: { type: "weather" },
   host: { type: "host" },
   battery: { type: "battery" },
+  disk: { type: "disk" },
+  network: { type: "network" }, // Added network provider
 });
 
 function App() {
@@ -45,7 +50,18 @@ function App() {
           </div>
 
           <Switch>
-            <Route path="/" component={() => <Host host={output.host} battery={output.battery} />} />
+            <Route path="/">
+              <Host host={output.host} battery={output.battery} />
+            </Route>
+            <Route path="/storage">
+              <Storage disk={output.disk} />
+            </Route>
+            <Route path="/cpu">
+              <Cpu cpu={output.cpu} />
+            </Route>
+            <Route path="/network">
+              <Network network={output.network} />
+            </Route>
           </Switch>
         </div>
       </div>

@@ -13,6 +13,7 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
+    "./fonts.css": "./src/fonts.css",
     "./index.css": "./dist/index.css",
     "./theme.css": "./src/theme.css"
   },
@@ -25,6 +26,7 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "lucide-react": "^0.460.0",
     "react": "catalog:",
     "react-dom": "catalog:",
     "tailwind-merge": "^2.6.0"

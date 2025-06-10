@@ -1,8 +1,8 @@
-import { cn } from "../../../utils/cn";
-import Ring from "./Ring";
-import { systemStatThresholds } from "../defaults/thresholds";
-import { LabelType } from "../types/labelType";
-import { Thresholds } from "../types/thresholds";
+import { cn } from "../../utils/cn";
+import Ring from "./components/Ring";
+import { systemStatThresholds } from "./defaults/systemStatThresholds";
+import { LabelType } from "./types/labelType";
+import { Thresholds } from "./types/thresholds";
 
 interface StatRingProps {
   Icon: React.ReactNode;
@@ -15,9 +15,13 @@ export function StatRing({
   stat,
   threshold = systemStatThresholds,
 }: StatRingProps) {
-  function getNumbersFromString(str: string) {
-    const numbers = str.match(/-?\d+/g)?.map(Number);
-    return numbers && numbers.length > 0 ? numbers[0] : NaN;
+  function getNumbersFromString(str: string): number {
+    const match = str.match(/-?\d+/g);
+    if (match && match.length > 0) {
+      const num = Number(match[0]);
+      return isNaN(num) ? 0 : num;
+    }
+    return 0;
   }
 
   function getThresholdLabel(value: number) {

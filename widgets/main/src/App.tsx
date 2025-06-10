@@ -10,7 +10,6 @@ import { TilingControl } from "./components/TilingControl";
 import VolumeControl from "./components/volume";
 import { WindowTitle } from "./components/windowTitle/WindowTitle";
 import { WorkspaceControls } from "./components/WorkspaceControls";
-import "./styles/fonts.css";
 import { calculateWidgetPlacementFromRight } from "./utils/calculateWidgetPlacement";
 import { useAutoTiling } from "./utils/useAutoTiling";
 import { getWeatherIcon } from "./utils/weatherIcons";
@@ -67,7 +66,10 @@ function App() {
             className="flex items-center gap-3 h-full"
             as="button"
             onClick={async () => {
-              const widgetPlacement = await calculateWidgetPlacementFromRight(chipRef, { width: 400, height: 200 })
+              const widgetPlacement = await calculateWidgetPlacementFromRight(
+                chipRef,
+                { width: 400, height: 200 }
+              );
               zebar.startWidget("system-stats", widgetPlacement, {});
             }}
           >

@@ -1,7 +1,5 @@
 import { cn } from "../../../utils/cn";
-import { systemStatThresholds } from "../defaults/thresholds";
-import { LabelType } from "../types/labelType";
-import { Thresholds } from "../types/thresholds";
+import { Thresholds, LabelType, systemStatThresholds as uiSystemStatThresholds } from "@overline-zebar/ui";
 
 interface StatProps {
   Icon: React.ReactNode;
@@ -12,7 +10,7 @@ interface StatProps {
 export function StatInline({
   Icon,
   stat,
-  threshold = systemStatThresholds,
+  threshold = uiSystemStatThresholds,
 }: StatProps) {
   function getNumbersFromString(str: string) {
     const numbers = str.match(/-?\d+/g)?.map(Number);
@@ -25,7 +23,7 @@ export function StatInline({
   }
 
   const statAsInt = getNumbersFromString(stat);
-  const thresholdLabel = getThresholdLabel(statAsInt);
+  const thresholdLabel = getThresholdLabel(statAsInt ?? NaN);
 
   return (
     <div

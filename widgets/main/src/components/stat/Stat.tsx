@@ -1,7 +1,6 @@
 import { StatInline } from "./components/StatInline";
-import { StatRing } from "./components/StatRing";
-import { systemStatThresholds, weatherThresholds } from "./defaults/thresholds";
-import { Thresholds } from "./types/thresholds";
+import { weatherThresholds } from "./defaults/thresholds";
+import { StatRing, systemStatThresholds, Thresholds } from "@overline-zebar/ui";
 
 interface StatProps {
   Icon: React.ReactNode;

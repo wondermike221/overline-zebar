@@ -2,13 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-size: 11px;
-  overflow: hidden;
-}
-
 html,
 body,
 #root {
   height: 100%;
+  font-size: 11px;
+  overflow: hidden;
+  --sb-track-color: var(--background);
+  --sb-thumb-color: var(--button);
+  --sb-size: 4px;
+}
+
+*::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 3px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
 }

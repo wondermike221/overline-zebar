@@ -1,11 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-
-// Import shared index.css as well as local index.css as we need to build both versions
-import "./styles/index.css";
-import "@overline-zebar/ui/theme.css"
-import "@overline-zebar/ui/index.css"
-
+import "./index.css";
+import "@overline-zebar/ui/theme.css";
+import "@overline-zebar/ui/index.css";
+import "@overline-zebar/ui/fonts.css";
 import App from "./App";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConfigProvider } from "./context/ConfigContext";
