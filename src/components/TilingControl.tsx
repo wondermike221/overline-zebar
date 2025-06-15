@@ -29,6 +29,18 @@ export function TilingControl({ glazewm }: TilingControlProps) {
             <Button>{bindingMode.displayName ?? bindingMode.name}</Button>
           </motion.div>
         ))}
+        {glazewm.isPaused && (
+          <motion.div
+            key="paused"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.15, ease: "easeInOut" }}
+            exit={{ opacity:0 }}
+            className="h-full"
+          >
+            <Button>Paused</Button>
+          </motion.div>
+        )}
       </AnimatePresence>
 
       <Button
