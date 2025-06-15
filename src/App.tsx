@@ -13,6 +13,7 @@ import "./styles/fonts.css";
 import { useAutoTiling } from "./utils/useAutoTiling";
 import { getWeatherIcon } from "./utils/weatherIcons";
 import Systray from "./components/systray";
+import { Battery } from "lucide-react";
 
 const providers = zebar.createProviderGroup({
   media: { type: "media" },
@@ -24,6 +25,7 @@ const providers = zebar.createProviderGroup({
   weather: { type: "weather" },
   audio: { type: "audio" },
   systray: { type: "systray" },
+  battery: { type: 'battery' },
 });
 
 function App() {
@@ -88,6 +90,14 @@ function App() {
                 Icon={getWeatherIcon(output.weather, statIconClassnames)}
                 stat={`${Math.round(output.weather.celsiusTemp)}°C`}
                 threshold={weatherThresholds}
+                type="inline"
+              />
+            )}
+
+            {output.battery && (
+              <Stat
+                Icon={<Battery strokeWidth={3} className={statIconClassnames} size={16} />}
+                stat={`${Math.round(output.battery.chargePercent)}%`}
                 type="inline"
               />
             )}
